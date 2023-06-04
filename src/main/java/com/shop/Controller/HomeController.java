@@ -16,9 +16,8 @@ public class HomeController {
 
     @Autowired
     AccountService accountService;
-    @GetMapping({"/"})
+    @GetMapping({""})
     public String home(){
-        System.out.println("Home");
         List<Accounts> list_acc = accountService.findAll();
         System.out.println("size " +list_acc.size());
         for (Accounts acc : list_acc

@@ -2,7 +2,6 @@ package com.shop.Service.Impl;
 
 
 import com.shop.Entity.Accounts;
-import com.shop.Entity.CustomUserDetails;
 import com.shop.Repository.AccountsRepository;
 import com.shop.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @Service
 @Primary
-public class AccoutServiceImpl implements AccountService , UserDetailsService {
+public class AccoutServiceImpl implements AccountService  {
     @Autowired
     AccountsRepository accountsRepository;
 
@@ -26,17 +25,14 @@ public class AccoutServiceImpl implements AccountService , UserDetailsService {
     }
 
     @Override
-    public Accounts findByUsername(String username) {
-        return accountsRepository.findByUsername(username);
+    public Accounts findByUsernameAndPassword(String username, String password) {
+        return accountsRepository.findByUsernameAndPassword(username,password);
     }
-
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Accounts user = accountsRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException(username);
-        }
-        return new CustomUserDetails(user);
+    public Accounts save(Accounts accounts) {
+        return accountsRepository.save(accounts);
     }
+
+
 }

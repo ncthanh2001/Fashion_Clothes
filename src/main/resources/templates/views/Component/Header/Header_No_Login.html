@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <th:block th:fragment="Header">
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -23,9 +25,11 @@
             <a href="./index.html"><img th:src="@{/img/logo.png}" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
+
         <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/register}">Register</a>
+
         </div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -42,7 +46,7 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li class="active"><a href="./index.html" th:text=" 'Hometxs' ">Home</a></li>
                             <li><a href="../../../../../ashion-master_template/ashion-master/shop.html">Shop</a></li>
                             <li><a href="#">Women’s</a></li>
                             <li><a href="#">Men’s</a></li>
@@ -62,8 +66,23 @@
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a th:href="@{../../login.html}">Login</a>
-                            <a th:href="@{../../register.html}">Register</a>
+                            <th:block th:unless="${session.username != null}">
+                                <a th:href="@{/login}">Login</a>
+                                <a th:href="@{/register}">Register</a>
+                            </th:block>
+                           <th:block th:if="${session.username != null }">
+                               <div class="btn_mes">
+                                   <button class="btn btn_me"><i class="fa-solid fa-user pl-2 ml-2" > <span th:text=" 'Hi , ' +${session.username}"></span></i></button>
+                                   <ul class="dropdown dropdown_me">
+                                       <li><a onclick="document.getElementById('id01').style.display='block' "> Edit Profile </a></li>
+                                       <li><a th:href="@{/change_pass}">Change Pass </a></li>
+                                       <th:block th:if="${session.role == true}">
+                                           <li><a th:href="@{home/admin}">Admin</a></li>
+                                       </th:block>
+                                       <li><a th:href="@{/log_out}">Log Out </a></li>
+                                   </ul>
+                               </div>
+                           </th:block>
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
@@ -81,8 +100,23 @@
                 <i class="fa fa-bars"></i>
             </div>
         </div>
+
+        <!--Modal-->
+
+        <div id="id01" class="modal_modal">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close_modal" title="Close Modal">&times;</span>
+            <form class="modal-content_modal" action="/action_page.php">
+                <div class="container_modal">
+                    <h1>EDIT PROFILE</h1>
+
+                    <div class="clearfix_modal">
+                        <button type="button" class="cancelbtn button_modal">Cancel</button>
+                        <button type="button" class="deletebtn button_modal">Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </header>
     <!-- Header Section End -->
-
 </th:block>
 </html>

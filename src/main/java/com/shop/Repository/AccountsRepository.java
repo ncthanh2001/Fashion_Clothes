@@ -9,10 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-@Primary
 public interface AccountsRepository extends JpaRepository<Accounts, String>, JpaSpecificationExecutor<Accounts> {
 
     List<Accounts> findAll();
-    Accounts findByUsername(String username);
+    Accounts findByUsernameAndPassword(String username,String password);
+
+//    Accounts save(Accounts accounts);
 
 }

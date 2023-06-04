@@ -14,8 +14,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../../../../../../../Java5/ASM/ASM_Solo/ASM_JAVA5/src/main/resources/static/dist/output.css">
+    <link rel="stylesheet" th:href="@{/dist/output.css}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+<!--    Sweet alert2-->
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.min.css
+    " rel="stylesheet">
 </head>
 
 <body>
@@ -26,7 +33,7 @@
 
             <div class="container h-full  mx-auto px-4 ">
                 <div class="flex justify-between items-center h-20">
-                    <a href="#" ><img class="-z-10" src="../../static/img/Logo_me.png" style="width: 150px; height: 150px;" alt=""></a>
+                    <a th:href="@{/home}" ><img class="-z-10" th:src="@{/img/logo.png}" style="width: 150px; height: 150px;" alt=""></a>
                     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
                         class="h-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         type="button">EN<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
@@ -53,32 +60,34 @@
 
                 <!-- ---- form --- -->
 
-                <form>
+                <form th:action="@{/register}" method="post" th:object="${account}" enctype="multipart/form-data">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="mb-4 ">
                             <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white z-10">
                                 Username</label>
-                            <input type="username" id="username"
+                            <input type="text" id="username" th:field="*{username}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="abc@gmail.com" required>
+                                placeholder="" required>
                         </div>
                         <div class="mb-4">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fullname</label>
-                            <input type="password" id="password"
+                            <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fullname</label>
+                            <input type="text" id="fullname" th:field="*{fullname}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required>
                         </div>
                     </div>
                    <div class="grid grid-cols-2 gap-4">
                         <div class="mb-4">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input type="password" id="password"
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            <input type="email" id="email" th:field="*{email}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required>
                         </div>
                         <div class="mb-4">
                             <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Avatar</label>
-                            <input class=" block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">      
+                            <input class=" block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-30 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                   aria-describedby="user_avatar_help" id="user_avatar" type="file"
+                                name="file">
                      
                         </div>
                    </div>
@@ -86,14 +95,14 @@
                         <div class="mb-4">
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Password</label>
-                            <input type="password" id="password"
+                            <input type="password" id="password" th:field="*{password}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required>
                         </div>
                         <div class="mb-4">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat 
+                            <label for="repeatPass" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat
                                 password</label>
-                            <input type="password" id="password"
+                            <input type="password" id="repeatPass" th:name="repeatPass"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required>
                         </div>
@@ -109,8 +118,8 @@
                         class="mb-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                 </form>
 
-                <span class="pt-4 text-sm font-medium">Have account? <a class=" text-sm font-medium text-blue-600 hover:text-blue-400" href="" >Login</a> </span>
-
+                <span class="pt-4 text-sm font-medium">Have account? <a class=" text-sm font-medium text-blue-600 hover:text-blue-400" th:href="@{/login}" >Login</a> </span>
+<!--                <p th:if="${mess}" th:text="${mess}"></p>-->
              </div>
 
         </div>
@@ -118,8 +127,39 @@
 
     </main>
 
-    <script src="../../../../../../../../Java5/ASM/ASM_Solo/ASM_JAVA5/node_modules/flowbite/dist/flowbite.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script> cdn flowbite  -->
+<!--    <script src="../../../../../../../../Java5/ASM/ASM_Solo/ASM_JAVA5/node_modules/flowbite/dist/flowbite.min.js"></script>-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+
+    <script  th:inline="javascript">
+        // Kiểm tra xem có thông báo thành công được truyền từ controller không
+        var successMessage = [[${successMessage}]];
+        var errorMessage = [[${errorMessage}]];
+        var inform = [[${inform}]];
+        if (successMessage) {
+            // Hiển thị thông báo thành công bằng SweetAlert2
+            Swal.fire({
+                icon: 'success',
+                title: 'Thông báo',
+                text: successMessage
+            }).then(function() {
+                // Sau khi người dùng nhấp vào OK, chuyển hướng sang trang home
+                window.location.href = "/login";
+            });
+        }else if(errorMessage){
+            // Hiển thị thông báo thành công bằng SweetAlert2
+            Swal.fire({
+                icon: 'error',
+                title: 'Thông báo',
+                text: errorMessage
+            })
+        }else if (inform){
+            Swal.fire({
+                icon: 'info',
+                title: 'Thông báo',
+                text: inform
+            })
+        }
+    </script>
 </body>
 
 </html>

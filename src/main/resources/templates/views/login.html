@@ -8,18 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ashion | Template</title>
-    <link rel="icon" type="image/png" href="../../../../../../../../Java5/ASM/ASM_Solo/ASM_JAVA5/src/main/resources/static/img/store.ico" />
+    <link rel="icon" type="image/png" th:href="@{/img/store.ico}" />
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 <!--    tailwindcss-->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../../../../../../ASM/ASM_Solo/ASM_JAVA5/src/main/resources/static/dist/output.css">
+    <link rel="stylesheet" th:href="@{/dist/output.css}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+<!--    Sweet Alert 2-->
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.min.css
+    " rel="stylesheet">
+
+
 </head>
 
 <body>
+
     <main class="w-full h-screen bg-repeat-round bg-blend-multiply bg-opacity-60 relative "
         style="background-image: url('https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fGNsb3RoZXMlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60');">
 
@@ -27,7 +37,7 @@
 
             <div class="container h-full  mx-auto px-4 ">
                 <div class="flex justify-between items-center h-20">
-                    <a href="#" ><img class="-z-10" src="../../static/img/Logo_me.png" style="width: 150px; height: 150px;" alt=""></a>
+                    <a href="/home" ><img class="-z-10" th:src="@{/img/logo.png}" style="width: 150px; height: 150px;" alt=""></a>
                     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
                         class="h-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         type="button">EN<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
@@ -54,26 +64,26 @@
 
                 <!-- ---- form --- -->
 
-                <form>
+                <form th:action="@{/login}" method="post">
                     <div class="mb-4 ">
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white z-10">Your
                             Username</label>
-                        <input type="username" id="username"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="abc@gmail.com" required>
+                            <input type="username" id="username" name="username" th:value="${username}"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="username" required>
                     </div>
                     <div class="mb-4">
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                             password</label>
-                        <input type="password" id="password"
+                        <input type="password" id="password" name="password" th:value="${password}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            required>
+                               placeholder="password"  required>
                     </div>
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center h-5">
-                            <input id="remember" type="checkbox" value=""
+                            <input id="remember" type="checkbox" name="remember"  value="true" th:checked="${remember}"
                                 class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                                required>
+                                >
                                 <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember
                                     me</label>
                         </div>
@@ -83,8 +93,8 @@
                         class="mb-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                 </form>
 
-                <span class="pt-4 text-sm font-medium">Don’t have an account yet? <a class=" text-sm font-medium text-blue-600 hover:text-blue-400" href="" >Register</a> </span>
-           
+                <span class="pt-4 text-sm font-medium">Don’t have an account yet? <a class=" text-sm font-medium text-blue-600 hover:text-blue-400" th:href="@{/register}" >Register</a> </span>
+
                 <div class="inline-flex items-center justify-center w-full">
                     <hr class="w-full h-px my-8 bg-gray-200 border-2 dark:bg-gray-700">
                     <span class="absolute px-3 font-bold text-lg text-gray-900 -translate-x-1/2 bg-slate-100 left-1/2 dark:text-white dark:bg-gray-900">OR</span>
@@ -94,11 +104,33 @@
 
         </div>
 
-
     </main>
+<!--    <script th:src="@{/flowbite/dist/flowbite.min.js}"></script>-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 
-    <script src="../../../../../../../ASM/ASM_Solo/ASM_JAVA5/node_modules/flowbite/dist/flowbite.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script> cdn flowbite  -->
+    <script  th:inline="javascript">
+        // Kiểm tra xem có thông báo thành công được truyền từ controller không
+        var successMessage = [[${successMessage}]];
+        var errorMessage = [[${errorMessage}]];
+        if (successMessage) {
+            // Hiển thị thông báo thành công bằng SweetAlert2
+            Swal.fire({
+                icon: 'success',
+                title: 'Thông báo',
+                text: successMessage
+            }).then(function() {
+                // Sau khi người dùng nhấp vào OK, chuyển hướng sang trang home
+                window.location.href = "/home";
+            });
+        }else if(errorMessage){
+                // Hiển thị thông báo thành công bằng SweetAlert2
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thông báo',
+                    text: errorMessage
+                })
+        }
+    </script>
 </body>
 
 </html>

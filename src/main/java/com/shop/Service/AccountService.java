@@ -7,5 +7,7 @@ import java.util.List;
 public interface AccountService {
 
     List<Accounts> findAll() ;
-    Accounts findByUsername(String username);
+    Accounts findByUsernameAndPassword(String username,String password);
+
+    Accounts save(Accounts accounts);
 }

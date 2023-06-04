@@ -1,11 +1,11 @@
-package edu.poly.service;
+package com.shop.Until;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class CookieService {
@@ -48,17 +48,11 @@ public class CookieService {
 		response.addCookie(cookie);
 		return cookie;
 	}
-	
-	public Cookie remove(String name) {
-		Cookie[] cookies = request.getCookies();
-		if(cookies!=null) {
-			for(Cookie cookie: cookies) {
-				if(cookie.getName().equalsIgnoreCase(name)) {
-					cookie.setMaxAge(0);
-					return cookie;
-				}
-			}
-		}
-		return null;
+
+	public void remove(String name) {
+		Cookie cookie = new Cookie(name, "");
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		response.addCookie(cookie);
 	}
 }

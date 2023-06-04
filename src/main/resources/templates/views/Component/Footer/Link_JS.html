@@ -12,5 +12,17 @@
         <script th:src="@{/js/owl.carousel.min.js}"></script>
         <script th:src="@{/js/jquery.nicescroll.min.js}"></script>
         <script th:src="@{/js/main.js}"></script>
+
+        <!--   modal edit profile     -->
+        <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
     </th:block>
 </html>
