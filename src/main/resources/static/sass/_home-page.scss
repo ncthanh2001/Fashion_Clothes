@@ -1,7 +1,7 @@
 /*---------------------
   Banner
 -----------------------*/
-.banner {
+.banner_me {
   height: 500px;
 }
 // .banner__item {
@@ -10,7 +10,7 @@
 //   align-items: center;
 // }
 
-.banner__text {
+.banner__text_me {
 
   span {
     font-size: 18px;
@@ -81,14 +81,14 @@
 /*---------------------
   Trend
 -----------------------*/
-.trend {
+.trend_me {
   padding-top: 80px;
   padding-bottom: 50px;
 }
 
 .trend__content {
 
-  .section-title {
+  .section-title_me {
 
     h4 {
       font-size: 20px;
@@ -119,7 +119,7 @@
     margin-bottom: 5px;
   }
 
-  .rating {
+  .rating_me {
     line-height: 18px;
     margin-bottom: 6px;
 
@@ -150,7 +150,7 @@
 /*---------------------
   Discount
 -----------------------*/
-.discount__pic {
+.discount__pic_me {
 
   img {
     min-width: 100%;
@@ -263,7 +263,7 @@
 /*---------------------
   Services
 -----------------------*/
-.services {
+.services_me {
   padding-top: 80px;
   padding-bottom: 50px;
 }

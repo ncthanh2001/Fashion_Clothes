@@ -1,14 +1,11 @@
 package com.shop.Service.Impl;
 
 
-import com.shop.Entity.Accounts;
+import com.shop.Entity.Account;
 import com.shop.Repository.AccountsRepository;
 import com.shop.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,17 +17,22 @@ public class AccoutServiceImpl implements AccountService  {
     AccountsRepository accountsRepository;
 
     @Override
-    public List<Accounts> findAll() {
+    public List<Account> findAll() {
         return accountsRepository.findAll();
     }
 
     @Override
-    public Accounts findByUsernameAndPassword(String username, String password) {
+    public Account findByUsernameAndPassword(String username, String password) {
         return accountsRepository.findByUsernameAndPassword(username,password);
     }
 
     @Override
-    public Accounts save(Accounts accounts) {
+    public Account findByUsername(String username) {
+        return accountsRepository.findByUsername(username);
+    }
+
+    @Override
+    public Account save(Account accounts) {
         return accountsRepository.save(accounts);
     }
 

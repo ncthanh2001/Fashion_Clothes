@@ -15,8 +15,8 @@ Created: Colorib
         Preloader
     --------------------*/
     $(window).on('load', function () {
-        $(".loader").fadeOut();
-        $("#preloder").delay(200).fadeOut("slow");
+        $(".loader_me").fadeOut();
+        $("#preloder_me").delay(200).fadeOut("slow");
 
         /*------------------
             Product filter
@@ -34,37 +34,37 @@ Created: Colorib
     /*------------------
         Background Set
     --------------------*/
-    $('.set-bg').each(function () {
+    $('.set-bg_me').each(function () {
         var bg = $(this).data('setbg');
         $(this).css('background-image', 'url(' + bg + ')');
     });
 
     //Search Switch
-    $('.search-switch').on('click', function () {
-        $('.search-model').fadeIn(400);
+    $('.search-switch_me').on('click', function () {
+        $('.search-model_me').fadeIn(400);
     });
 
-    $('.search-close-switch').on('click', function () {
-        $('.search-model').fadeOut(400, function () {
+    $('.search-close-switch_me').on('click', function () {
+        $('.search-model_me').fadeOut(400, function () {
             $('#search-input').val('');
         });
     });
 
     //Canvas Menu
-    $(".canvas__open").on('click', function () {
-        $(".offcanvas-menu-wrapper").addClass("active");
+    $(".canvas__open_me").on('click', function () {
+        $(".offcanvas-menu-wrapper_me").addClass("active");
         $(".offcanvas-menu-overlay").addClass("active");
     });
 
     $(".offcanvas-menu-overlay, .offcanvas__close").on('click', function () {
-        $(".offcanvas-menu-wrapper").removeClass("active");
+        $(".offcanvas-menu-wrapper_me").removeClass("active");
         $(".offcanvas-menu-overlay").removeClass("active");
     });
 
     /*------------------
 		Navigation
 	--------------------*/
-    $(".header__menu").slicknav({
+    $(".header__menu_me").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
     });
@@ -83,7 +83,7 @@ Created: Colorib
     /*--------------------------
         Banner Slider
     ----------------------------*/
-    $(".banner__slider").owlCarousel({
+    $(".banner__slider_me").owlCarousel({
         loop: true,
         margin: 0,
         items: 1,

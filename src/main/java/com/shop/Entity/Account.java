@@ -1,42 +1,46 @@
 package com.shop.Entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Nationalized;
 
-import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Accounts")
-@Data
-public class Accounts {
-
+public class Account {
     @Id
+    @Nationalized
     @Column(name = "Username", nullable = false, length = 50)
     private String username;
 
+    @Nationalized
     @Column(name = "Password", nullable = false, length = 50)
     private String password;
 
+    @Nationalized
     @Column(name = "Fullname", nullable = false, length = 100)
     private String fullname;
 
+    @Nationalized
     @Column(name = "Email", nullable = false, length = 50)
     private String email;
 
-    @Column(name = "Photo", nullable = true , length = 100)
+    @Nationalized
+    @Column(name = "Photo", length = 100)
     private String photo;
 
     @Column(name = "Activated", nullable = false)
-    private boolean activated;
+    private Boolean activated = false;
 
     @Column(name = "Admin", nullable = false)
-    private boolean admin;
+    private Boolean admin = false;
 
-    @OneToMany(mappedBy = "accounts_or", fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
-    @ToString.Exclude // Khoonhg sử dụng trong toString()
-    private Collection<Orders> orders;
+    @OneToMany(mappedBy = "username")
+    private Set<Order> orders = new LinkedHashSet<>();
 
-  }
+}

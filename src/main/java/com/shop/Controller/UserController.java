@@ -1,8 +1,10 @@
 package com.shop.Controller;
 
-import com.shop.Entity.Accounts;
+import com.shop.Constant.PathUpload;
+import com.shop.Entity.Account;
 import com.shop.Service.AccountService;
 import com.shop.Until.CookieService;
+import com.shop.Until.SaveFileUntil;
 import com.shop.Until.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +43,7 @@ public class UserController {
                             @RequestParam("username") String username ,
                             @RequestParam("password") String password,
                             @RequestParam(value = "remember",required = false) Boolean remember){
-        Accounts accounts = accountService.findByUsernameAndPassword(username,password);
+        Account accounts = accountService.findByUsernameAndPassword(username,password);
         if(accounts != null){
             if(remember != null && remember){
                 cookieService.add("username",accounts.getUsername(),1);
@@ -49,14 +51,14 @@ public class UserController {
                 cookieService.add("remember", Boolean.toString(remember),1);
                 model.addAttribute("successMessage","Login Thành công !");
                 sessionService.set("username",accounts.getUsername());
-                sessionService.set("role",accounts.isAdmin());
+                sessionService.set("role",accounts.getAdmin());
                 return  "views/login";
             }else {
                 cookieService.remove("username");
                 cookieService.remove("password");
                 cookieService.remove("remember");
                 sessionService.set("username",accounts.getUsername());
-                sessionService.set("role",accounts.isAdmin());
+                sessionService.set("role",accounts.getAdmin());
                 model.addAttribute("successMessage","Login Thành công !");
                 return  "views/login";
             }
@@ -69,18 +71,18 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String getRegister(@ModelAttribute("account") Accounts accounts,Model model){
-        model.addAttribute("account",new Accounts());
+    public String getRegister(@ModelAttribute("account") Account accounts,Model model){
+        model.addAttribute("account",new Account());
         return "views/register";
     }
 
     @PostMapping("/register")
-    public  String postRegister(@ModelAttribute("account") Accounts accounts,Model model,
+    public  String postRegister(@ModelAttribute("account") Account accounts,Model model,
                                 @RequestParam(value = "file",required = false) MultipartFile file,
                                 @RequestParam("repeatPass" )String repeatPass){
-        List<Accounts> list_check = accountService.findAll();
+        List<Account> list_check = accountService.findAll();
         if(accounts!= null && accounts.getPassword().equals(repeatPass)){
-            for (Accounts account_check : list_check) {
+            for (Account account_check : list_check) {
                 if(account_check.getUsername().equals(accounts.getUsername())){
                     model.addAttribute("inform", "username đã tồn tại ");
                     return "views/register";
@@ -88,12 +90,17 @@ public class UserController {
                     model.addAttribute("inform","email đã được sử dụng ");
                     return "views/register";
                 }else{
+                    try {
+                        SaveFileUntil.save(file, PathUpload.PATH_AVATAR_IMAGE);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     accounts.setPhoto(file.getOriginalFilename());
                     accountService.save(accounts);
-                    model.addAttribute("account",new Accounts());
+                    model.addAttribute("account",new Account());
                     model.addAttribute("successMessage","Đăng Ký Tài Khoản Thành công");
                     sessionService.set("username",accounts.getUsername());
-                    sessionService.set("role",accounts.isAdmin());
+                    sessionService.set("role",accounts.getAdmin());
                     return "views/register";
                 }
             }
@@ -114,5 +121,17 @@ public class UserController {
         sessionService.remove("role");
         return "redirect:/login";
     }
-
+    @PostMapping("/edit_profile")
+    public String EditProfile(@ModelAttribute("Account")Account accounts,
+                              @RequestParam(value = "file",required = false) MultipartFile file){
+        Account currentAccount = accountService.findByUsername(accounts.getUsername());
+        if(currentAccount != null){
+            currentAccount.setFullname(accounts.getFullname());
+            currentAccount.setEmail(accounts.getEmail());
+            currentAccount.setPhoto(file.getOriginalFilename());
+            accountService.save(currentAccount);
+            return "redirect:/home";
+        }
+         return "redirect:/home";
+    }
 }

@@ -6,14 +6,14 @@
 </head>
 
 <body>
-<th:block th:include="~{/views/Component/Header/Header_No_Login :: Header}"></th:block>
+<th:block th:include="~{/views/Component/Header/Header_ :: Header}"></th:block>
     <!-- Categories Section Begin -->
 <section class="categories">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 p-0">
                 <div  th:attr="data-setbg=@{http://localhost:3306/img/categories/category-1.jpg}"
-                        class="categories__item categories__large__item set-bg">
+                        class="categories__item categories__large__item set-bg_me">
                     <div class="categories__text">
                         <h1 style="font-size: 70px; ">Women’s fashion</h1>
                         <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
@@ -25,7 +25,7 @@
             <div class="col-lg-6">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/categories/category-2.jpg}">
+                        <div class="categories__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/categories/category-2.jpg}">
                             <div class="categories__text">
                                 <h4>Men’s fashion</h4>
                                 <p>358 items</p>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/categories/category-3.jpg}">
+                        <div class="categories__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/categories/category-3.jpg}">
                             <div class="categories__text">
                                 <h4>Kid’s fashion</h4>
                                 <p>273 items</p>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/categories/category-4.jpg}">
+                        <div class="categories__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/categories/category-4.jpg}">
                             <div class="categories__text">
                                 <h4>Cosmetics</h4>
                                 <p>159 items</p>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/categories/category-5.jpg}">
+                        <div class="categories__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/categories/category-5.jpg}">
                             <div class="categories__text">
                                 <h4>Accessories</h4>
                                 <p>792 items</p>
@@ -68,12 +68,12 @@
 <!-- Categories Section End -->
 
 <!-- Product Section Begin -->
-<section class="product spad">
+<section class="product spad_me">
     <div class="container ">
         <div class="row">
             <div class="col-lg-4 col-md-4">
-                <div class="section-title">
-                    <h4>New product</h4>
+                <div class="section-title_me">
+                    <h4>Sale Product</h4>
                 </div>
             </div>
             <div class="col-lg-8 col-md-8">
@@ -87,214 +87,262 @@
                 </ul>
             </div>
         </div>
-        <div class="row property__gallery">
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" th:attr="data-setbg=@{http://localhost:3306/img/product/product-1.jpg}">
-                        <div class="label new">New</div>
-                        <ul class="product__hover">
-                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Buttons tweed blazer</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                <div class="row property__gallery" >
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic"th:each="discount : ${discountProduct}">
+                        <div class="product__item sale">
+                            <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/product/product-6.jpg}">
+                                <div class="label sale">Sale</div>
+                                <ul class="product__hover">
+                                    <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><a th:href="@{/product/{nameProduct}(nameProduct=${discount.getProduct().getId()})}" th:text="${discount.getProduct().getName()}"></a></h6>
+                                <div class="rating_me">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price_me">$[[${discount.getDiscountedPrice()}]]VND - <span>$[[${discount.getProduct().getPrice()}]] VND </span></div>
+
+                            </div>
                         </div>
-                        <div class="product__price">$ 59.0</div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix men">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" th:attr="data-setbg=@{http://localhost:3306/img/product/product-2.jpg}">
-                        <ul class="product__hover">
-                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Flowy striped skirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 49.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix accessories">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" th:attr="data-setbg=@{http://localhost:3306/img/product/product-3.jpg}">
-                        <div class="label stockout">out of stock</div>
-                        <ul class="product__hover">
-                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Cotton T-Shirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix cosmetic">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" th:attr="data-setbg=@{http://localhost:3306/img/product/product-4.jpg}">
-                        <ul class="product__hover">
-                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Slim striped pocket shirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix kid">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" th:attr="data-setbg=@{http://localhost:3306/img/product/product-5.jpg}">
-                        <ul class="product__hover">
-                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Fit micro corduroy shirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                <div class="product__item sale">
-                    <div class="product__item__pic set-bg" th:attr="data-setbg=@{http://localhost:3306/img/product/product-6.jpg}">
-                        <div class="label sale">Sale</div>
-                        <ul class="product__hover">
-                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Tropical Kimono</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" th:attr="data-setbg=@{http://localhost:3306/img/product/product-7.jpg}">
-                        <ul class="product__hover">
-                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Contrasting sunglasses</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                <div class="product__item sale">
-                    <div class="product__item__pic set-bg" th:attr="data-setbg=@{http://localhost:3306/img/product/product-8.jpg}">
-                        <div class="label">Sale</div>
-                        <ul class="product__hover">
-                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Water resistant backpack</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<th:block>
+
+<!--        <div class="row property__gallery">-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 mix women">-->
+<!--                <div class="product__item">-->
+<!--                    <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/product/product-1.jpg}">-->
+<!--                        <div class="label new">New</div>-->
+<!--                        <ul class="product__hover">-->
+<!--                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="product__item__text">-->
+<!--                        <h6><a href="#">Buttons tweed blazer</a></h6>-->
+<!--                        <div class="rating_me">-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                        </div>-->
+<!--                        <div class="product__price_me">$ 59.0</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 mix men">-->
+<!--                <div class="product__item">-->
+<!--                    <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/product/product-2.jpg}">-->
+<!--                        <ul class="product__hover">-->
+<!--                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="product__item__text">-->
+<!--                        <h6><a href="#">Flowy striped skirt</a></h6>-->
+<!--                        <div class="rating_me">-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                        </div>-->
+<!--                        <div class="product__price_me">$ 49.0</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 mix accessories">-->
+<!--                <div class="product__item">-->
+<!--                    <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/product/product-3.jpg}">-->
+<!--                        <div class="label stockout">out of stock</div>-->
+<!--                        <ul class="product__hover">-->
+<!--                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="product__item__text">-->
+<!--                        <h6><a href="#">Cotton T-Shirt</a></h6>-->
+<!--                        <div class="rating_me">-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                        </div>-->
+<!--                        <div class="product__price_me">$ 59.0</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 mix cosmetic">-->
+<!--                <div class="product__item">-->
+<!--                    <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/product/product-4.jpg}">-->
+<!--                        <ul class="product__hover">-->
+<!--                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="product__item__text">-->
+<!--                        <h6><a href="#">Slim striped pocket shirt</a></h6>-->
+<!--                        <div class="rating_me">-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                        </div>-->
+<!--                        <div class="product__price_me">$ 59.0</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 mix kid">-->
+<!--                <div class="product__item">-->
+<!--                    <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/product/product-5.jpg}">-->
+<!--                        <ul class="product__hover">-->
+<!--                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="product__item__text">-->
+<!--                        <h6><a href="#">Fit micro corduroy shirt</a></h6>-->
+<!--                        <div class="rating_me">-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                        </div>-->
+<!--                        <div class="product__price_me">$ 59.0</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">-->
+<!--                <div class="product__item sale">-->
+<!--                    <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/product/product-6.jpg}">-->
+<!--                        <div class="label sale">Sale</div>-->
+<!--                        <ul class="product__hover">-->
+<!--                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="product__item__text">-->
+<!--                        <h6><a href="#">Tropical Kimono</a></h6>-->
+<!--                        <div class="rating_me">-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                        </div>-->
+<!--                        <div class="product__price_me">$ 49.0 <span>$ 59.0</span></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">-->
+<!--                <div class="product__item">-->
+<!--                    <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/product/product-7.jpg}">-->
+<!--                        <ul class="product__hover">-->
+<!--                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="product__item__text">-->
+<!--                        <h6><a href="#">Contrasting sunglasses</a></h6>-->
+<!--                        <div class="rating_me">-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                        </div>-->
+<!--                        <div class="product__price_me">$ 59.0</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">-->
+<!--                <div class="product__item sale">-->
+<!--                    <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/product/product-8.jpg}">-->
+<!--                        <div class="label">Sale</div>-->
+<!--                        <ul class="product__hover">-->
+<!--                            <li><a href="../../../../../../../Java5/ASM/ASM_Solo/ashion-master_template/ashion-master/img/product/product-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>-->
+<!--                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="product__item__text">-->
+<!--                        <h6><a href="#">Water resistant backpack</a></h6>-->
+<!--                        <div class="rating_me">-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                            <i class="fa fa-star"></i>-->
+<!--                        </div>-->
+<!--                        <div class="product__price_me">$ 49.0 <span>$ 59.0</span></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+</th:block>
+        <nav aria-label="...">
+            <ul class="pagination">
+                    <li class="page-item " th:unless="${currentPage == 0}">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" th:href="@{/home?page=0}"  th:name="page" >First</a>
+                    </li>
+                    <li class="page-item "  th:unless="${currentPage == 0}">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" th:href="@{/home?page=__${currentPage - 1}__}" th:name="page">Previous</a>
+                    </li>
+                <th:block th:each="pageNum : ${#numbers.sequence(1, totalPages)}" >
+                    <li  th:classappend=" ${pageNum }==${currentPage + 1} ? 'active' : 'none' "  class="page-item"><a class="page-link" th:href="@{/home?page=__${pageNum - 1}__}" th:text="${pageNum}" ></a></li>
+                </th:block>
+                    <li class="page-item" th:unless="${currentPage + 1 >= totalPages}">
+                        <a class="page-link"  th:href="@{/home?page=__${currentPage + 1}__}"  th:name="page">Next</a>
+                    </li>
+                    <li class="page-item" th:unless="${currentPage + 1 >= totalPages}">
+                        <a class="page-link" th:href="@{/home?page=__${totalPages - 1}__}"  th:name="page">Last</a>
+                    </li>
+            </ul>
+        </nav>
     </div>
 </section>
 <!-- Product Section End -->
 
 <!-- Banner Section Begin -->
-<section class="banner set-bg" th:attr="data-setbg=@{http://localhost:3306/img/banner/banner-1.jpg}">
+<section class="banner_me set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/banner/banner-1.jpg}">
     <div class="container">
         <div class="row">
             <div class="col-xl-7 col-lg-8 m-auto">
-                <div class="banner__slider owl-carousel">
+                <div class="banner__slider_me owl-carousel">
                     <div class="banner__item">
-                        <div class="banner__text">
+                        <div class="banner__text_me">
                             <span>The Chloe Collection</span>
                             <h1>The Project Jacket</h1>
                             <a href="#">Shop now</a>
                         </div>
                     </div>
                     <div class="banner__item">
-                        <div class="banner__text">
+                        <div class="banner__text_me">
                             <span>The Chloe Collection</span>
                             <h1>The Project Jacket</h1>
                             <a href="#">Shop now</a>
                         </div>
                     </div>
                     <div class="banner__item">
-                        <div class="banner__text">
+                        <div class="banner__text_me">
                             <span>The Chloe Collection</span>
                             <h1>The Project Jacket</h1>
                             <a href="#">Shop now</a>
@@ -308,170 +356,170 @@
 <!-- Banner Section End -->
 
 <!-- Trend Section Begin -->
-<section class="trend spad">
+<section class="trend_me spad_me">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="trend__content">
-                    <div class="section-title">
+                    <div class="section-title_me">
                         <h4>Hot Trend</h4>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
+                    <div class="trend__item_me">
+                        <div class="trend__item__pic_me">
                             <img th:src="@{/img/trend/ht-1.jpg}" alt="">
                         </div>
-                        <div class="trend__item__text">
+                        <div class="trend__item__text_me">
                             <h6>Chain bucket bag</h6>
-                            <div class="rating">
+                            <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__price_me">$ 59.0</div>
                         </div>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
+                    <div class="trend__item_me">
+                        <div class="trend__item__pic_me">
                             <img th:src="@{/img/trend/ht-2.jpg}" alt="">
                         </div>
-                        <div class="trend__item__text">
+                        <div class="trend__item__text_me">
                             <h6>Pendant earrings</h6>
-                            <div class="rating">
+                            <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__price_me">$ 59.0</div>
                         </div>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
+                    <div class="trend__item_me">
+                        <div class="trend__item__pic_me">
                             <img th:src="@{/img/trend/ht-3.jpg}" alt="">
                         </div>
-                        <div class="trend__item__text">
+                        <div class="trend__item__text_me">
                             <h6>Cotton T-Shirt</h6>
-                            <div class="rating">
+                            <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__price_me">$ 59.0</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="trend__content">
-                    <div class="section-title">
+                    <div class="section-title_me">
                         <h4>Best seller</h4>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
+                    <div class="trend__item_me">
+                        <div class="trend__item__pic_me">
                             <img th:src="@{/img/trend/bs-1.jpg}" alt="">
                         </div>
-                        <div class="trend__item__text">
+                        <div class="trend__item__text_me">
                             <h6>Cotton T-Shirt</h6>
-                            <div class="rating">
+                            <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__price_me">$ 59.0</div>
                         </div>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
+                    <div class="trend__item_me">
+                        <div class="trend__item__pic_me">
                             <img th:src="@{/img/trend/bs-2.jpg}" alt="">
                         </div>
-                        <div class="trend__item__text">
+                        <div class="trend__item__text_me">
                             <h6>Zip-pockets pebbled tote <br />briefcase</h6>
-                            <div class="rating">
+                            <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__price_me">$ 59.0</div>
                         </div>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
+                    <div class="trend__item_me">
+                        <div class="trend__item__pic_me">
                             <img th:src="@{/img/trend/bs-3.jpg}" alt="">
                         </div>
-                        <div class="trend__item__text">
+                        <div class="trend__item__text_me">
                             <h6>Round leather bag</h6>
-                            <div class="rating">
+                            <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__price_me">$ 59.0</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="trend__content">
-                    <div class="section-title">
+                    <div class="section-title_me">
                         <h4>Feature</h4>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
+                    <div class="trend__item_me">
+                        <div class="trend__item__pic_me">
                             <img th:src="@{/img/trend/f-1.jpg}" alt="">
                         </div>
-                        <div class="trend__item__text">
+                        <div class="trend__item__text_me">
                             <h6>Bow wrap skirt</h6>
-                            <div class="rating">
+                            <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__price_me">$ 59.0</div>
                         </div>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
+                    <div class="trend__item_me">
+                        <div class="trend__item__pic_me">
                             <img th:src="@{/img/trend/f-2.jpg}" alt="">
                         </div>
-                        <div class="trend__item__text">
+                        <div class="trend__item__text_me">
                             <h6>Metallic earrings</h6>
-                            <div class="rating">
+                            <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__price_me">$ 59.0</div>
                         </div>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
+                    <div class="trend__item_me">
+                        <div class="trend__item__pic_me">
                             <img th:src="@{/img/trend/f-3.jpg}" alt="">
                         </div>
-                        <div class="trend__item__text">
+                        <div class="trend__item__text_me">
                             <h6>Flap cross-body bag</h6>
-                            <div class="rating">
+                            <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__price_me">$ 59.0</div>
                         </div>
                     </div>
                 </div>
@@ -486,18 +534,18 @@
     <div class="container ">
         <div class="row">
             <div class="col-lg-6 p-0">
-                <div class="discount__pic">
+                <div class="discount__pic_me">
                     <img th:src="@{/img/discount.jpg}" alt="">
                 </div>
             </div>
             <div class="col-lg-6 p-0">
-                <div class="discount__text">
-                    <div class="discount__text__title">
+                <div class="discount__text_me">
+                    <div class="discount__text__title_me">
                         <span>Discount</span>
                         <h2>Summer 2019</h2>
                         <h5><span>Sale</span> 50%</h5>
                     </div>
-                    <div class="discount__countdown" id="countdown-time">
+                    <div class="discount__countdown_me" id="countdown-time">
                         <div class="countdown__item">
                             <span>22</span>
                             <p>Days</p>
@@ -524,7 +572,7 @@
 <!-- Discount Section End -->
 
 <!-- Services Section Begin -->
-<section class="services spad">
+<section class="services_me spad_me">
     <div class="container ">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6">
@@ -565,7 +613,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-1.jpg}" >
+                <div class="instagram__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-1.jpg}" >
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -573,7 +621,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-2.jpg}">
+                <div class="instagram__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-2.jpg}">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -581,7 +629,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-3.jpg}">
+                <div class="instagram__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-3.jpg}">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -589,7 +637,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-4.jpg}">
+                <div class="instagram__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-4.jpg}">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -597,7 +645,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-5.jpg}">
+                <div class="instagram__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-5.jpg}">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -605,7 +653,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-6.jpg}">
+                <div class="instagram__item set-bg_me" th:attr="data-setbg=@{http://localhost:3306/img/instagram/insta-6.jpg}">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -618,10 +666,10 @@
 <!-- Instagram End -->
 
 <!-- Search Begin -->
-<div class="search-model">
+<div class="search-model_me">
     <div class="h-100 d-flex align-items-center justify-content-center">
-        <div class="search-close-switch">+</div>
-        <form class="search-model-form">
+        <div class="search-close-switch_me">+</div>
+        <form class="search-model-form_me">
             <input type="text" id="search-input" placeholder="Search here.....">
         </form>
     </div>

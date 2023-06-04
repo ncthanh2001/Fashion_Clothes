@@ -28,14 +28,15 @@ public class UploadController {
 
             return "UploadImage";
         }
-
+    private static final Path root_avt = Paths.get("src/uploads/UserAvatar");
+    private static final Path Product_Image = Paths.get("src/uploads/ProductImage");
         @PostMapping("/upload")
         public String handleUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes , Model model) {
 
             //            // Xử lý tệp tin đã upload
 //            // Lưu tệp tin vào thư mục /path/to/uploads/
             try {
-                SaveFileUntil.save(file);
+                SaveFileUntil.save(file,root_avt);
                 System.out.println("savesuccess");
                 String filepathigm =file.getOriginalFilename();
                 model.addAttribute("name_image", filepathigm);

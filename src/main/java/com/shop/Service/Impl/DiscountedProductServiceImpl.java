@@ -1,4 +1,30 @@
 package com.shop.Service.Impl;
 
-public class DiscountedProductServiceImpl {
+import com.shop.Entity.DiscountedProduct;
+import com.shop.Repository.DiscountedProductsRepository;
+import com.shop.Service.DiscountedProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class DiscountedProductServiceImpl implements DiscountedProductService {
+    @Autowired
+    DiscountedProductsRepository discountedProductsRepository;
+
+    @Override
+    public List<DiscountedProduct> findAll() {
+        return discountedProductsRepository.findAll();
+    }
+
+    @Override
+    public Page<DiscountedProduct> findAll(Pageable pageable) {
+        return discountedProductsRepository.findAll(pageable);
+    }
+
+
+
 }

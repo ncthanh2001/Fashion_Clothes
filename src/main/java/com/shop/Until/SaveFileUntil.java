@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class SaveFileUntil {
-    private final Path root1 = Paths.get("src/main/resources/static/DefaultImg");
+//    private final Path root1 = Paths.get("src/main/resources/static/DefaultImg");
 
 //    public void save(MultipartFile file) {
 //        try {
@@ -22,9 +22,9 @@ public class SaveFileUntil {
 //        }
 //    }
 
-    private static final Path root = Paths.get("src/uploads");
+//    private static final Path root = Paths.get("src/uploads");
     //"D:\\STUDYYYYY\\Java5\\Project_Java5\\An_Phuc\\1_thucHanhLab\\1_thucHanhLab\\lab
-    public static void save(MultipartFile file) {
+    public static void save(MultipartFile file ,Path root ) {
         Path filePath = root;
         System.out.println("filePath : "+filePath.toString());
         try {
