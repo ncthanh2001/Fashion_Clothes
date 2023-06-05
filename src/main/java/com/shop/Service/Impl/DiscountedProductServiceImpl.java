@@ -1,6 +1,7 @@
 package com.shop.Service.Impl;
 
 import com.shop.Entity.DiscountedProduct;
+import com.shop.Entity.Product;
 import com.shop.Repository.DiscountedProductsRepository;
 import com.shop.Service.DiscountedProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class DiscountedProductServiceImpl implements DiscountedProductService {
         return discountedProductsRepository.findAll(pageable);
     }
 
+    @Override
+    public DiscountedProduct findById(int Id) {
+        return discountedProductsRepository.findById(Id);
+    }
 
 
 }

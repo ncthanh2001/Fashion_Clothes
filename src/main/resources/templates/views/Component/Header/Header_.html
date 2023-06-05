@@ -111,7 +111,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form th:object="${account}" method="post" th:action="@{/edit_profile}" enctype="multipart/form-data">
+                    <form th:if="${account !=null}" th:object="${account}" method="post" th:action="@{/edit_profile}" enctype="multipart/form-data">
                     <div class="modal-body">
                         <label class="form-label" >Photo</label>
                         <div class="card" >

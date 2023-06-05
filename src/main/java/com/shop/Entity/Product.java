@@ -59,4 +59,19 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private Set<OrderDetail> orderDetails = new LinkedHashSet<>();
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", createDate=" + createDate +
+                ", quantity=" + quantity +
+                ", category=" + category +
+                ", isDelete=" + isDelete +
+                ", size='" + size + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }

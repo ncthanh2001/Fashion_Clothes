@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -42,7 +43,17 @@ public class HomeController {
 
     @Autowired
     SessionService sessionService;
-
+//    @GetMapping("/test")
+//    public String hoem(){
+//        Pageable pageable1 = PageRequest.of(0, 10);
+////        Page<Product> listtest = productService.findByCategoryAfter(pageable1);
+//        List<Product> listtest = productService.findAll();
+//        System.out.println("sn phảm a: ");
+//        for (Product pro : listtest){
+//            System.out.println(pro.toString());
+//        }
+//        return "views/User/blog";
+//    }
     @GetMapping({""})
     public String home(Model model, @RequestParam(defaultValue = "0", value = "page",required = false) int page) {
         int pageSize = 8;
@@ -51,14 +62,23 @@ public class HomeController {
         List<DiscountedProduct> discountedProductsList = discountedProductsPage.getContent();
         int totalPage = discountedProductsPage.getTotalPages();
 
-        model.addAttribute("discountProduct", discountedProductsList);
+        int pageSize_product = 3;
+        Pageable pageable_product = PageRequest.of(page, pageSize_product);
+        Page<Product> ProductPage = productService.findAll(pageable_product);
+        List<Product> Products_List = ProductPage.getContent();
+        int totalPage_Product = ProductPage.getTotalPages();
+
+        model.addAttribute("productList", Products_List);
         model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPage);
+        model.addAttribute("totalPages", totalPage_Product);
 
+
+   if(discountedProductsList !=null){
+       model.addAttribute("discountProduct", discountedProductsList);
+       model.addAttribute("currentPage", page);
+       model.addAttribute("totalPages", totalPage);
+   }
        Account accounts = accountService.findByUsername(sessionService.get("username"));
-
-
-
        if(accounts !=null){
            model.addAttribute("account",accounts);
            System.out.println(accounts.getPhoto());
