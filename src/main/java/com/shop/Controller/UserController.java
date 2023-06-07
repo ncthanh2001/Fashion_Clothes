@@ -52,6 +52,7 @@ public class UserController {
                 model.addAttribute("successMessage","Login Thành công !");
                 sessionService.set("username",accounts.getUsername());
                 sessionService.set("role",accounts.getAdmin());
+                sessionService.set("photo",accounts.getPhoto());
                 return  "views/login";
             }else {
                 cookieService.remove("username");
@@ -59,6 +60,7 @@ public class UserController {
                 cookieService.remove("remember");
                 sessionService.set("username",accounts.getUsername());
                 sessionService.set("role",accounts.getAdmin());
+                sessionService.set("photo",accounts.getPhoto());
                 model.addAttribute("successMessage","Login Thành công !");
                 return  "views/login";
             }
@@ -101,6 +103,7 @@ public class UserController {
                     model.addAttribute("successMessage","Đăng Ký Tài Khoản Thành công");
                     sessionService.set("username",accounts.getUsername());
                     sessionService.set("role",accounts.getAdmin());
+                    sessionService.set("photo",accounts.getPhoto());
                     return "views/register";
                 }
             }

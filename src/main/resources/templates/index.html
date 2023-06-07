@@ -299,7 +299,7 @@
 <!--            </div>-->
 <!--        </div>-->
 </th:block>
-        <nav aria-label="...">
+        <nav aria-label="..." th:if="${currentPage != null}">
             <ul class="pagination">
                     <li class="page-item " th:unless="${currentPage == 0}">
                         <a class="page-link" tabindex="-1" aria-disabled="true" th:href="@{/home?page=0}"  th:name="page" >First</a>

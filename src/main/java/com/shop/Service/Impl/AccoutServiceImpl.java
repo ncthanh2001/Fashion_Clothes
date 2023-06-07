@@ -6,6 +6,10 @@ import com.shop.Repository.AccountsRepository;
 import com.shop.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +31,11 @@ public class AccoutServiceImpl implements AccountService  {
     }
 
     @Override
+    public Page<Account> findAll(Pageable pageable) {
+        return accountsRepository.findAll(pageable);
+    }
+
+    @Override
     public Account findByUsername(String username) {
         return accountsRepository.findByUsername(username);
     }
@@ -35,6 +44,12 @@ public class AccoutServiceImpl implements AccountService  {
     public Account save(Account accounts) {
         return accountsRepository.save(accounts);
     }
+
+    @Override
+    public List<Account> findByActivated(boolean active) {
+        return null;
+    }
+
 
 
 }
