@@ -15,4 +15,14 @@ public class OrdersDetailServiceImpl implements OrderDetailService {
     public List<OrderDetail> findAll() {
         return orderDetailsRepository.findAll();
     }
+
+    @Override
+    public List<OrderDetail> findAllByOrderId(int id) {
+        return orderDetailsRepository.findAllByOrderId(id);
+    }
+
+    @Override
+    public OrderDetail save(OrderDetail orderDetail) {
+        return orderDetailsRepository.save(orderDetail);
+    }
 }

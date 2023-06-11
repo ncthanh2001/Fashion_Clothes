@@ -27,4 +27,5 @@ public interface ProductsRepository extends JpaRepository<Product, Integer>, Jpa
     List<Product>findTopByPrice(BigDecimal price);
 
     Page<Product>findAll(Pageable page);
+
 }

@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface AccountsRepository extends JpaRepository<Account, String>, JpaSpecificationExecutor<Account> {
@@ -20,4 +19,6 @@ public interface AccountsRepository extends JpaRepository<Account, String>, JpaS
 
 
     Page<Account> findAll(Specification<Account> spec, Pageable pageable);
+
+    Page<Account> findByActivated(boolean active , Pageable pageable);
 }

@@ -13,6 +13,8 @@ List<Account> findAll();
     Account findByUsernameAndPassword(String username,String password);
     Account findByUsername(String username);
     Account save(Account accounts);
-    List<Account> findByActivated(boolean active);
+    Page<Account> findByActivated(boolean active,Pageable pageable);
+
+    Account delete(Account account, boolean acitve );
 
 }

@@ -17,11 +17,12 @@
   <link rel="stylesheet" th:href="@{plugins/datatables-responsive/css/responsive.bootstrap4.min.css}">
   <link rel="stylesheet" th:href="@{plugins/datatables-buttons/css/buttons.bootstrap4.min.css}">
   <!--    Sweet Alert 2-->
+  <script th:src="@{/js/sweet_alert2.js}"></script>
   <script src="
-    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js
     "></script>
   <link href="
-    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.min.css
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.min.css
     " rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
@@ -88,7 +89,7 @@
                         <div class="input-group">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
-                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            <label class="custom-file-label" for="exampleInputFile" name="chooseFile">Choose file</label>
                           </div>
                         </div>
                       </div>
@@ -121,8 +122,9 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-success">Submit</button>
+                  <button type="submit" class="btn btn-success">Update</button>
                   <button type="button" class="btn btn-light btn-outline-primary" id="clearbtn">Clear</button>
+                  <button type="button" id="newbtn" class="border-0">NEW</button>
                 </div>
               </form>
             </div>
@@ -136,6 +138,7 @@
     <!-- /.content -->
 
 <!--    list-->
+    <p th:if="${success}" th:text="${success}"></p>
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -161,9 +164,9 @@
 
                   <tbody>
 
-                  <tr th:each="account : ${accountList}">
+                  <tr th:each="account : ${accountList}" data-th-id="${account.username}">
 
-                    <td th:text="${account.username}">Username</td>
+                    <td th:text="${account.username}" >Username</td>
                     <td th:text="${account.fullname}">Fullname</td>
                     <td th:text="${account.email}">Email</td>
                     <td th:text="${account.photo}"></td>
@@ -195,7 +198,7 @@
                     </td>
                     <td>
                       <a th:href="@{/admin/account/edit(username=${account.username})}" class="mx-3"><i class="fa-solid fa-pen-to-square" style="color: #1d27bf;"></i></a>
-                      <a href="" class=""><i class="fa-solid fa-trash" style="color: #cb2a2a;"></i></a>
+                      <button th:attr="onclick='deleteUser(\''+${account.username}+'\')'" id="deletebtn" class="border-0"><i class="fa-solid fa-trash" style="color: #cb2a2a;"></i></button>
                     </td>
                   </tr>
                   </tbody>
@@ -239,6 +242,29 @@
 </div>
 <!-- ./wrapper -->
 
+<script th:inline="javascript">
+  function deleteUser(username){
+    var row = $('#deletebtn').closest('tr'); // Lấy phần tử cha <tr> gần nhất của button được nhấp
+    $.ajax({
+      url:'/admin/account/delete',
+      method:'POST',
+      data:{username:username},
+    }).then(function(data){
+    row.remove()
+      sweet_Alert("Xóa Thành công",null,null)
+    }).fail(function(error){
+      sweet_Alert("Xóa Thất Bại",null,null)
+    })
+
+  }
+  // Kiểm tra xem có thông báo thành công được truyền từ controller không Edit
+  var success = [[${success}]];
+  var error = [[${error}]];
+  sweet_Alert(success,error,"/admin/account")
+
+</script>
+<!--ajax-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- jQuery -->
 <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->
@@ -280,6 +306,12 @@ $('#clearbtn').click(function(){
   $('#fullname').val(fullnameOrigin)
   $('#email').val( emailOrigin)
 })
+$('#newbtn').click(function(){
+  $('#username').val('')
+  $('#fullname').val('')
+  $('#email').val('')
+  document.getElementsByClassName('chooseFile').value=''
+})
 
 </script>
 <script>
@@ -300,29 +332,5 @@ $('#clearbtn').click(function(){
   });
 </script>
 
-<script th:inline="javascript">
-
-  // Kiểm tra xem có thông báo thành công được truyền từ controller không
-  var successMessage = [[${success}]];
-  var errorMessage = [[${error}]];
-  if (successMessage) {
-    // Hiển thị thông báo thành công bằng SweetAlert2
-    Swal.fire({
-      icon: 'success',
-      title: 'Thông báo',
-      text: success
-    }).then(function() {
-      // Sau khi người dùng nhấp vào OK, chuyển hướng sang trang home
-      window.location.href = "/admin/account/edit";
-    });
-  }else if(errorMessage){
-    // Hiển thị thông báo thành công bằng SweetAlert2
-    Swal.fire({
-      icon: 'error',
-      title: 'Thông báo',
-      text: error
-    })
-  }
-</script>
 </body>
 </html>

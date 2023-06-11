@@ -1,5 +1,6 @@
 package com.shop.Controller;
 
+import com.shop.Constant.PageSize;
 import com.shop.Entity.Account;
 import com.shop.Entity.DiscountedProduct;
 import com.shop.Entity.Product;
@@ -89,5 +90,20 @@ public class HomeController {
        }
 
     }
+
+    @GetMapping("/shop")
+    public String shop(Model model, @RequestParam(defaultValue = "0", value = "page",required = false) int page){
+       Pageable pageable = PageRequest.of(page,PageSize.PAGE_SIZE );
+       Page<Product> productPage = productService.findAll(pageable);
+       List<Product>productList = productPage.getContent();
+       int totalPage = productPage.getSize();
+
+       model.addAttribute("currentPage",page);
+       model.addAttribute("productList",productList);
+       model.addAttribute("totalPages",totalPage);
+
+    return "views/User/shop";
+    }
+
 
 }

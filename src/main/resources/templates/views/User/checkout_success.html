@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{/views/Component/Header/Link_Header.html :: link_head}"></th:block>
+</head>
+
+<body>
+<th:block th:include="~{/views/Component/Header/Header_ :: Header}"></th:block>
+
+
+<!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="../../../../../../../../template_ASM/ashion-master/ashion-master/index.html"><i class="fa fa-home"></i> Home</a>
+                        <span>Shopping cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="row">
+                <div class="container">
+                    <div class="checkout__order">
+                        <h5>Your order</h5>
+                        <form >
+                            <div class="row mb-3">
+                              <label for="inputEmail3" class="col-sm-2 col-form-label">OrderId : </label>
+                              <div class="col-sm-10">
+                                  <p th:text="${order.id}"> OrderId</p>
+                              </div>
+                            </div>
+                            <div class="row mb-3">
+                              <label for="inputPassword3" class="col-sm-2 col-form-label">Name</label>
+                              <div class="col-sm-10">
+                                <p th:text="${order.username.fullname}"> Name</p>
+                              </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Phone</label>
+                                <div class="col-sm-10">
+                                 <p th:text="${phone}"> phone</p>
+                                </div>
+                              </div>
+                              <div class="row mb-3">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <p th:text="${order.username.email}"> email</p>
+                                </div>
+                              </div>
+                              <div class="row mb-3">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">CreateDate</label>
+                                <div class="col-sm-10">
+                                    <p th:text="${order.createDate}"> create</p>
+                                </div>
+                              </div>
+                              
+                          </form>
+                        <div class=s"checkout__order__product table-responsive">
+                            <table class="table caption-top">
+                                <!-- <caption>List of users</caption> -->
+                                <thead>
+                                  <tr class="">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr th:each="ordertail , itemStat : ${orderdetailList}">
+                                    <th scope="row" th:text="${itemStat.index +1}">1</th>
+                                    <td th:text="${ordertail.product.name}">Mark</td>
+                                    <td th:text="${ordertail.price}">Otto</td>
+                                    <td th:text="${ordertail.quantity}">@mdo</td>
+                                      <td th:text="${ordertail.quantity * order_detail.price}">@mdo</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                        <div class="checkout__order__total">
+                            <ul>
+                                <li>Subtotal <span>$ 750.0</span></li>
+                                <li>Total <span th:text="${total}">$ 750.0</span></li>
+                            </ul>
+                        </div>
+                        <div class="checkout__order__widget">
+                            <label for="o-acc">
+                                Create an acount?
+                                <input type="checkbox" id="o-acc">
+                                <span class="checkmark"></span>
+                            </label>
+                            <p>Create am acount by entering the information below. If you are a returing customer
+                            login at the top of the page.</p>
+                            <label for="check-payment">
+                                Cheque payment
+                                <input type="checkbox" id="check-payment">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="paypal">
+                                PayPal
+                                <input type="checkbox" id="paypal">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="site-btn_me">Place oder</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!-- Checkout Section End -->
+<script>
+    sweet_Alert(success,null,null);
+</script>
+<th:block th:include="~{views/Component/Footer/Footer.html :: Footer}"></th:block>
+<th:block th:include="~{views/Component/Footer/Link_JS.html :: Link_JS}"></th:block>
+</body>
+
+    </html>

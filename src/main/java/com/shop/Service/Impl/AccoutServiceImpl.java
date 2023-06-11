@@ -46,10 +46,15 @@ public class AccoutServiceImpl implements AccountService  {
     }
 
     @Override
-    public List<Account> findByActivated(boolean active) {
-        return null;
+    public Page<Account> findByActivated(boolean active,Pageable pageable) {
+        return accountsRepository.findByActivated(active,pageable);
     }
 
+    @Override
+    public Account delete(Account account,boolean active) {
+            account.setActivated( active);
+        return accountsRepository.save(account);
+    }
 
 
 }

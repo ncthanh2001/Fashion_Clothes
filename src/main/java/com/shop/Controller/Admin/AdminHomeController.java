@@ -1,7 +1,9 @@
 package com.shop.Controller.Admin;
 
+import com.shop.Constant.PageSize;
 import com.shop.Constant.PathUpload;
 import com.shop.Entity.Account;
+import com.shop.Entity.Category;
 import com.shop.Service.AccountService;
 import com.shop.Until.SaveFileUntil;
 import com.shop.Until.SessionService;
@@ -37,9 +39,9 @@ public class AdminHomeController {
     public String getAccount(Model model, @ModelAttribute("accountEdit") Account accountEdit, @RequestParam(defaultValue = "0", value = "page",required = false) int page){
         Account account = accountService.findByUsername(sessionService.get("username"));
         model.addAttribute("flag_account",true);
-        int pageSize = 5;
-        Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Account> accountPage = accountService.findAll(pageable);
+
+        Pageable pageable = PageRequest.of(page, PageSize.PAGE_SIZE);
+        Page<Account> accountPage = accountService.findByActivated(true,pageable);
         List<Account> accountList = accountPage.getContent();
         int totalPage = accountPage.getSize();
 
@@ -58,13 +60,13 @@ public class AdminHomeController {
         Account account = accountService.findByUsername(sessionService.get("username"));
         model.addAttribute("account",account);
         model.addAttribute("flag_account",true);
-        int pageSize = 5;
-        Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Account> accountPage = accountService.findAll(pageable);
+        Pageable pageable = PageRequest.of(page, PageSize.PAGE_SIZE);
+        Page<Account> accountPage = accountService.findByActivated(true,pageable);
         List<Account> accountList = accountPage.getContent();
         int totalPage = accountPage.getSize();
 
         model.addAttribute("accountList",accountList);
+
         model.addAttribute("currentPage",page);
         model.addAttribute("totalPage",totalPage);
         Account accountEdit = accountService.findByUsername(username);
@@ -80,8 +82,7 @@ public class AdminHomeController {
     public String PostEditAccount(Model model , @ModelAttribute("accountEdit") Account accountEdit
             , @RequestParam(value = "file",required = false) MultipartFile file, @RequestParam(defaultValue = "0", value = "page",required = false) int page ){
 
-        int pageSize = 5;
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Pageable pageable = PageRequest.of(page, PageSize.PAGE_SIZE);
         Page<Account> accountPage = accountService.findAll(pageable);
         List<Account> accountList = accountPage.getContent();
         int totalPage = accountPage.getSize();
@@ -102,7 +103,9 @@ public class AdminHomeController {
         if(accountEdit!=null && accountEdit.getUsername().equals(accountcurrent.getUsername())){
             accountcurrent.setFullname(accountEdit.getFullname());
             accountcurrent.setEmail(accountEdit.getEmail());
-            accountcurrent.setPhoto(file.getOriginalFilename());
+            if(file.isEmpty()){
+                accountcurrent.setPhoto(file.getOriginalFilename());
+            }
             accountService.save(accountcurrent);
             model.addAttribute("success","Cập nhật thành công");
             return "views/Admin/pages/forms/general";
@@ -111,4 +114,24 @@ public class AdminHomeController {
             return "views/Admin/pages/forms/general";
         }
     }
+    @PostMapping("/account/delete")
+    @ResponseBody
+    public String PostdeleteAccount(Model model , @RequestParam("username" )String username
+            , @RequestParam(defaultValue = "0", value = "page",required = false) int page
+    ){
+        System.out.println("delete post");
+        Account accountcurrent = accountService.findByUsername(username);
+        if(accountcurrent != null){
+            accountService.delete(accountcurrent,false);
+            model.addAttribute("success" , "Xóa Thành Công ");
+            return "Success";
+        }else{
+            model.addAttribute("error" , "Xóa Thất Bại ");
+            return "Error";
+        }
+
+    }
+
+
+
 }

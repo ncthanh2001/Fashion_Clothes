@@ -23,7 +23,7 @@ public class Order {
     @JoinColumn(name = "Username", nullable = false)
     private Account username;
 
-    @Column(name = "CreateDate", nullable = false)
+    @Column(name = "create_date" , insertable = false, updatable = false)
     private LocalDate createDate;
 
     @Nationalized
