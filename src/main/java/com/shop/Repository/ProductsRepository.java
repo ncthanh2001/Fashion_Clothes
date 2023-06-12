@@ -1,5 +1,6 @@
 package com.shop.Repository;
 
+import com.shop.Entity.Category;
 import com.shop.Entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,17 +16,13 @@ import java.util.List;
 
 @Repository
 public interface ProductsRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
-//    @Query(value = "select e from Product e where e.size = :size1  ")
     Product findByName(String name);
-
     Product findById(int Id);
-
-    List<Product> findByColorEquals(String name);
-
     List<Product>findByPriceBetween(BigDecimal a , BigDecimal b );
-
     List<Product>findTopByPrice(BigDecimal price);
-
     Page<Product>findAll(Pageable page);
+
+    Page<Product>findByCategory(Category category, Pageable pageable);
+
 
 }

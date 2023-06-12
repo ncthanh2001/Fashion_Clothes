@@ -61,13 +61,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../../../../../../../template_ASM/Admin_Template/AdminLTE-master/AdminLTE-master/pages/forms/editors.html" class="nav-link">
+                                <a  th:href="@{/admin/order}" th:classappend="${flag_order == true ? 'active' : ''}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Order Controller</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../../../../../../../template_ASM/Admin_Template/AdminLTE-master/AdminLTE-master/pages/forms/validation.html" class="nav-link">
+                                <a  th:href="@{/admin/product}" th:classappend="${flag_product == true ? 'active' : ''}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>ProductController</p>
                                 </a>

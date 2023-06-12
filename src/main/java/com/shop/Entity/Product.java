@@ -45,13 +45,6 @@ public class Product {
     @Column(name = "is_delete", nullable = false)
     private Boolean isDelete = false;
 
-    @Nationalized
-    @Column(name = "\"Size\"", length = 10)
-    private String size;
-
-    @Nationalized
-    @Column(name = "Color", length = 20)
-    private String color;
 
     @OneToMany(mappedBy = "product")
     private Set<DiscountedProduct> discountedProducts = new LinkedHashSet<>();
@@ -70,8 +63,6 @@ public class Product {
                 ", quantity=" + quantity +
                 ", category=" + category +
                 ", isDelete=" + isDelete +
-                ", size='" + size + '\'' +
-                ", color='" + color + '\'' +
                 '}';
     }
 }

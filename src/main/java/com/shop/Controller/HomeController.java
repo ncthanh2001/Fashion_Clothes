@@ -2,6 +2,7 @@ package com.shop.Controller;
 
 import com.shop.Constant.PageSize;
 import com.shop.Entity.Account;
+import com.shop.Entity.Category;
 import com.shop.Entity.DiscountedProduct;
 import com.shop.Entity.Product;
 import com.shop.Service.*;
@@ -17,7 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/home")
@@ -44,17 +47,7 @@ public class HomeController {
 
     @Autowired
     SessionService sessionService;
-//    @GetMapping("/test")
-//    public String hoem(){
-//        Pageable pageable1 = PageRequest.of(0, 10);
-////        Page<Product> listtest = productService.findByCategoryAfter(pageable1);
-//        List<Product> listtest = productService.findAll();
-//        System.out.println("sn phảm a: ");
-//        for (Product pro : listtest){
-//            System.out.println(pro.toString());
-//        }
-//        return "views/User/blog";
-//    }
+
     @GetMapping({""})
     public String home(Model model, @RequestParam(defaultValue = "0", value = "page",required = false) int page) {
         int pageSize = 8;
@@ -72,7 +65,7 @@ public class HomeController {
         model.addAttribute("productList", Products_List);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPage_Product);
-
+        model.addAttribute("flag_home",true);
 
    if(discountedProductsList !=null){
        model.addAttribute("discountProduct", discountedProductsList);
@@ -98,12 +91,39 @@ public class HomeController {
        List<Product>productList = productPage.getContent();
        int totalPage = productPage.getSize();
 
+        Map<Integer , String> categoryMap = new HashMap<>();
+        List<Category> categoryList= categorieService.findAll();
+        for (Category catrgorytemp :categoryList) {
+            categoryMap.put(catrgorytemp.getId(),catrgorytemp.getName());
+        }
+
+
+        model.addAttribute("category",categoryMap);
        model.addAttribute("currentPage",page);
        model.addAttribute("productList",productList);
        model.addAttribute("totalPages",totalPage);
-
+        model.addAttribute("flag_shop",true);
     return "views/User/shop";
     }
 
+    @GetMapping("/shop/category={id}")
+    public String findCategori(Model model, @PathVariable("id")int id
+    ,@RequestParam(defaultValue = "0", value = "page",required = false) int page){
+        Pageable pageable = PageRequest.of(page,PageSize.PAGE_SIZE);
+        Page<Product> productPage = productService.findByCategory(id,pageable);
+        List<Product> productList = productPage.getContent();
+        int totalPage = productPage.getTotalPages();
+        model.addAttribute("currentPage",page);
+        model.addAttribute("totalPages",totalPage);
+        model.addAttribute("productList",productList);
 
+        Map<Integer , String> categoryMap = new HashMap<>();
+        List<Category> categoryList= categorieService.findAll();
+        for (Category catrgorytemp :categoryList) {
+            categoryMap.put(catrgorytemp.getId(),catrgorytemp.getName());
+        }
+        model.addAttribute("category",categoryMap);
+        model.addAttribute("flag_shop",true);
+        return "views/User/shop";
+    }
 }

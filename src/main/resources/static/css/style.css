@@ -1387,19 +1387,10 @@ ol, ul{
 	line-height: 30px;
 }
 
-.categories__accordion .card-heading a:after,
-.categories__accordion .card-heading>a.active[aria-expanded=false]:after {
-	content: "";
-	font-size: 14px;
-	font-family: "FontAwesome";
-	color: #666666;
-	position: absolute;
-	right: 30px;
-	top: 0px;
-}
+/*.cas*/
 
 .categories__accordion .card-heading.active a:after {
-	content: "";
+	/*content: "";*/
 	font-size: 14px;
 	font-family: "FontAwesome";
 	color: #666666;
@@ -1408,16 +1399,16 @@ ol, ul{
 	top: -1px;
 }
 
-.categories__accordion .card-heading a[aria-expanded=true]:after,
-.categories__accordion .card-heading>a.active:after {
-	content: "";
-	font-size: 14px;
-	font-family: "FontAwesome";
-	color: #666666;
-	position: absolute;
-	right: 30px;
-	top: -1px;
-}
+/*.categories__accordion .card-heading a[aria-expanded=true]:after,*/
+/*.categories__accordion .card-heading>a.active:after {*/
+/*	content: "";*/
+/*	font-size: 14px;*/
+/*	font-family: "FontAwesome";*/
+/*	color: #666666;*/
+/*	position: absolute;*/
+/*	right: 30px;*/
+/*	top: -1px;*/
+/*}*/
 
 .sidebar__filter {
 	position: relative;

@@ -46,20 +46,18 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu_me">
                         <ul>
-                            <li class="active"><a th:href="@{/home}">Home</a></li>
-                            <li><a th:href="@{/home/shop}">Shop</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="../../../../../ashion-master_template/ashion-master/product-details.html">Product Details</a></li>
-                                    <li><a href="../../../../../ashion-master_template/ashion-master/shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="../../../../../ashion-master_template/ashion-master/checkout.html">Checkout</a></li>
-                                    <li><a href="../../../../../ashion-master_template/ashion-master/blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="../../../../../ashion-master_template/ashion-master/blog.html">Blog</a></li>
-                            <li><a href="../../../../../ashion-master_template/ashion-master/contact.html">Contact</a></li>
+                            <li class="" th:classappend="${flag_home == true ? 'active' : ''}"><a th:href="@{/home}">Home</a></li>
+                            <li th:classappend="${ flag_shop == true ? 'active' : ''}"><a th:href="@{/home/shop}">Product</a></li>
+                            <li><a href="#">Blog</a></li>
+<!--                            <li><a href="#">Pages</a>-->
+<!--                                <ul class="dropdown">-->
+<!--                                    <li><a href="../../../../../ashion-master_template/ashion-master/product-details.html">Product Details</a></li>-->
+<!--                                    <li><a href="../../../../../ashion-master_template/ashion-master/shop-cart.html">Shop Cart</a></li>-->
+<!--                                    <li><a href="../../../../../ashion-master_template/ashion-master/checkout.html">Checkout</a></li>-->
+<!--                                    <li><a href="../../../../../ashion-master_template/ashion-master/blog-details.html">Blog Details</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
