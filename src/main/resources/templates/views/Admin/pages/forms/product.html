@@ -115,7 +115,7 @@
                     <div class="col">
                       <div class="form-group">
                         <label for="createDate">createDate</label>
-                        <input th:field="*{createDate}" type="date" th:id="createDate" th:value="${product_edit.createDate}"   class="form-control" id="createDate" placeholder="Enter Email">
+                        <input th:field="*{createDate}" type="text" th:id="createDate" th:value="${product_edit.createDate}"   class="form-control" id="createDate" placeholder="Enter Email">
                       </div>
                     </div>
                   </div>
@@ -207,7 +207,7 @@
                     <td th:text="${product.category.name}"> </td>
                     <td>
                       <a  th:href="@{/admin/product/edit(id=${product.id})}" class="mx-3"><i class="fa-solid fa-pen-to-square" style="color: #1d27bf;"></i></a>
-                      <button th:attr="onclick=''" id="deletebtn" class="border-0"><i class="fa-solid fa-trash" style="color: #cb2a2a;"></i></button>
+                      <button th:attr="onclick='deleteUser(\''+${product.id}+'\')'" id="deletebtn"     class="border-0"><i class="fa-solid fa-trash" style="color: #cb2a2a;"></i></button>
                     </td>
                   </tr>
                   </tbody>
@@ -252,16 +252,15 @@
 <!-- ./wrapper -->
 
 <script th:inline="javascript">
-
-  function deleteUser(username){
+  function deleteUser(id){
     var row = $('#deletebtn').closest('tr'); // Lấy phần tử cha <tr> gần nhất của button được nhấp
     $.ajax({
-      url:'/admin/account/delete',
+      url:'/admin/product/delete',
       method:'POST',
-      data:{username:username},
+      data:{id:id},
     }).then(function(data){
-    row.remove()
-      sweet_Alert("Xóa Thành công",null,null)
+      row.remove()
+      sweet_Alert("Xóa Thành công12",null,null)
     }).fail(function(error){
       sweet_Alert("Xóa Thất Bại",null,null)
     })
@@ -270,7 +269,7 @@
   // Kiểm tra xem có thông báo thành công được truyền từ controller không Edit
   var success = [[${success}]];
   var error = [[${error}]];
-  sweet_Alert(success,error,"/admin/account")
+  sweet_Alert(success,error,null)
 
 </script>
 <!--ajax-->

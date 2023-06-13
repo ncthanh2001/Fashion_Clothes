@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -46,8 +47,16 @@ public class CategoryController {
         }
         model.addAttribute("categoryList",categoryList);
 
-//        model.addAttribute("category",category);
+        Category category_edit = (Category) model.asMap().get("category_edit");
+        model.addAttribute("category_edit",category_edit);
 
         return "/views/Admin/pages/forms/category";
+    }
+    @GetMapping("/category/edit")
+    public String getCategory(RedirectAttributes redirectAttributes,
+                              @RequestParam("id") int id){
+        Category category=  categorieService.findById(id);
+        redirectAttributes.addFlashAttribute("category_edit",category);
+        return "redirect:/admin/category";
     }
 }

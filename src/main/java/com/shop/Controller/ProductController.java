@@ -6,12 +6,17 @@ import com.shop.Entity.Product;
 import com.shop.Service.DiscountedProductService;
 import com.shop.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/home")
@@ -25,6 +30,9 @@ public class ProductController {
     public String getProduct(Model model , @PathVariable("id")int id) {
         model.addAttribute("account", new Account());
         DiscountedProduct discounted_Product = discountedProductService.findById(id);
+        Pageable pageable = PageRequest.of(1,4);
+        Page<Product> productList = productService.findAll(pageable);
+        model.addAttribute("list_footer",productList.getContent());
         if(discounted_Product!=null){
             model.addAttribute("discount_product",discounted_Product);
         }else{

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AccountService {
 List<Account> findAll();
@@ -16,5 +17,5 @@ List<Account> findAll();
     Page<Account> findByActivated(boolean active,Pageable pageable);
 
     Account delete(Account account, boolean acitve );
-
+    Optional<Account> findByUsernameAndEmail(String username  , String email);
 }

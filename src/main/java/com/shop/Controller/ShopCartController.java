@@ -34,13 +34,24 @@ public class ShopCartController {
     @GetMapping("/cart")
     public String GetCart(Model model){
         model.addAttribute("list_cart",cartItem);
+        String infor = (String) model.asMap().get("infor");
+        model.addAttribute("infor",infor);
 
         return "/views/User/shop-cart";
     }
     @GetMapping ("/cart/add")
-    public  String PostCart(Model model, @RequestParam(value = "id" ,required = false) int id){
-        cartItem.add(id);
-        return "redirect:/home/cart";
+    public  String PostCart(Model model, @RequestParam(value = "id" ,required = false) int id
+    ,RedirectAttributes redirectAttributes){
+        Account account = accountService.findByUsername(sessionService.get("username"));
+        if(account != null){
+            cartItem.add(id);
+            return "redirect:/home/cart";
+        }else {
+           redirectAttributes.addFlashAttribute("infor","vui lòng đăng nhập để đặt hàng ");
+            return "redirect:/home/cart";
+        }
+
+
     }
 
     @GetMapping("/cart/remove")

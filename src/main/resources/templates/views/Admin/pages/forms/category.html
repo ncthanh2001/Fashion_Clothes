@@ -85,7 +85,7 @@
                         <td th:text="${category.name}">name</td>
 
                         <td>
-                          <a th:href="@{/admin/account/edit(username=${account.username})}" class="mx-3"><i class="fa-solid fa-pen-to-square" style="color: #1d27bf;"></i></a>
+                          <a th:href="@{/admin/category/edit(id=${category.id})}" class="mx-3"><i class="fa-solid fa-pen-to-square" style="color: #1d27bf;"></i></a>
                           <button th:attr="onclick='deleteUser(\''+${account.username}+'\')'" id="deletebtn" class="border-0"><i class="fa-solid fa-trash" style="color: #cb2a2a;"></i></button>
                         </td>
                       </tr>
@@ -123,7 +123,7 @@
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <form action="/admin/account/edit" method="post" th:object="${category}">
+                  <form action="/admin/category/edit" method="post" th:object="${category}" >
                     <div class="card-body">
                       <div class="row">
                         <div class="col">
@@ -139,15 +139,15 @@
                       <div class="row">
                         <div class="col">
                           <div class="form-group">
-                            <label for="fullname">Fullname</label>
-                            <input type="text" class="form-control" id="fullname" placeholder="Fullname" >
+                            <label for="cateID">ID</label>
+                            <input type="text" class="form-control" id="cateID" placeholder="cateID" th:value="${category_edit?.id}">
                           </div>
                         </div>
                       </div>
                         <div class="col">
                           <div class="form-group">
-                            <label for="email">Email</label>
-                            <input  type="email" class="form-control" id="email" placeholder="Email">
+                            <label for="name">Name</label>
+                            <input  type="name" class="form-control" id="name" placeholder="name" th:value="${category_edit?.name}">
                           </div>
                         </div>
                     </div>

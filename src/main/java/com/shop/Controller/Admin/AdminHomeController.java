@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.util.List;
@@ -29,9 +30,13 @@ public class AdminHomeController {
     AccountService accountService;
 
     @GetMapping("/home")
-    public String getHome(Model model){
+    public String getHome(Model model , RedirectAttributes redirectAttributes){
        Account account = accountService.findByUsername(sessionService.get("username"));
        model.addAttribute("account",account);
+       if(!account.getAdmin()){
+           redirectAttributes.addFlashAttribute("infor","bạn không có quyền truy cập vào đường dẫn này ");
+           return "redirect:/login";
+       }
         return "views/Admin/index_Admin";
     }
 

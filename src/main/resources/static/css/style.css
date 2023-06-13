@@ -1580,7 +1580,7 @@ ol, ul{
 	font-size: 14px;
 	color: #111111;
 	font-weight: 600;
-	line-height: 40px;
+	line-height: 26px;
 	text-align: center;
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
@@ -1601,7 +1601,11 @@ ol, ul{
 	border-color: #0d0d0d;
 	color: #ffffff;
 }
-
+.pagination__option a.active {
+	background: #0d0d0d;
+	border-color: #0d0d0d;
+	color: #ffffff;
+}
 /*---------------------
   Product Details
 -----------------------*/

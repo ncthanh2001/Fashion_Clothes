@@ -88,18 +88,18 @@
             </div>
         </div>
                 <div class="row property__gallery" >
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic"th:each="discount : ${discountProduct}">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic"th:each="product : ${productList}">
                         <div class="product__item sale">
-                            <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/uploads/ProductImage/__${discount.product.image}__}">
+                            <div class="product__item__pic set-bg_me" th:attr="data-setbg=@{http://localhost:3306/uploads/ProductImage/__${product.image}__}">
                                 <div class="label sale">Sale</div>
                                 <ul class="product__hover">
-                                    <li><a th:href="@{/uploads/ProductImage/__${discount.product.image}__}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                    <li><a th:href="@{/uploads/ProductImage/__${product.image}__}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                    <li><a th:href="@{/home/cart/add(id=${discount.product.id})}"><span class="icon_bag_alt"></span></a></li>
+                                    <li><a th:href="@{/home/cart/add(id=${product.id})}"><span class="icon_bag_alt"></span></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
-                                <h6><a th:href="@{/home/product/id={id}(id=${discount.getProduct().getId()})}" th:text="${discount.getProduct().name}"></a></h6>
+                                <h6><a th:href="@{/home/product/id={id}(id=${product.id})}" th:text="${product.name}"></a></h6>
 
                                 <div class="rating_me">
                                     <i class="fa fa-star"></i>
@@ -108,33 +108,45 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <div class="product__price_me">$[[${#numbers.formatCurrency(discount.getDiscountedPrice())}]]VND - <span>$[[${#numbers.formatCurrency(discount.product.getPrice())}]] VND </span></div>
-
+                                <div class="product__price_me">$[[${#numbers.formatCurrency(product.price)}]]VND </div>
                             </div>
                         </div>
                     </div>
                 </div>
+        <div class="col-lg-12 text-center">
+            <div class="pagination__option">
+            <th:block th:unless="${currentPage == 0}">
+                <a class="page-link" tabindex="-1" aria-disabled="true" th:href="@{/home?page=__${currentPage - 1}__}" th:name="page"><i class="fa-solid fa-chevron-left"></i></a>
+            </th:block>
+                <th:block th:each="pageNum : ${#numbers.sequence(1, totalPages)}" >
+                        <a class="page-link "  th:classappend=" ${pageNum }==${currentPage + 1} ? 'active' : 'none' " th:href="@{/home?page=__${pageNum - 1}__}" th:text="${pageNum}" ></a>
+                </th:block>
+                <th:block  th:unless="${currentPage + 1 >= totalPages}">
+                    <a class="page-link"s th:href="@{/home?page=__${currentPage + 1}__}"  th:name="page"><i class="fa-solid fa-chevron-right"></i></a>
+                </th:block>
+            </div>
+        </div>
 <th:block>
 </th:block>
-        <nav aria-label="..." th:if="${currentPage != null}">
-            <ul class="pagination">
-                    <li class="page-item " th:unless="${currentPage == 0}">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" th:href="@{/home?page=0}"  th:name="page" >First</a>
-                    </li>
-                    <li class="page-item "  th:unless="${currentPage == 0}">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" th:href="@{/home?page=__${currentPage - 1}__}" th:name="page">Previous</a>
-                    </li>
-                <th:block th:each="pageNum : ${#numbers.sequence(1, totalPages)}" >
-                    <li  th:classappend=" ${pageNum }==${currentPage + 1} ? 'active' : 'none' "  class="page-item"><a class="page-link" th:href="@{/home?page=__${pageNum - 1}__}" th:text="${pageNum}" ></a></li>
-                </th:block>
-                    <li class="page-item" th:unless="${currentPage + 1 >= totalPages}">
-                        <a class="page-link"  th:href="@{/home?page=__${currentPage + 1}__}"  th:name="page">Next</a>
-                    </li>
-                    <li class="page-item" th:unless="${currentPage + 1 >= totalPages}">
-                        <a class="page-link" th:href="@{/home?page=__${totalPages - 1}__}"  th:name="page">Last</a>
-                    </li>
-            </ul>
-        </nav>
+<!--        <nav aria-label="..." th:if="${currentPage != null}">-->
+<!--            <ul class="pagination">-->
+<!--                    <li class="page-item " th:unless="${currentPage == 0}">-->
+<!--                        <a class="page-link" tabindex="-1" aria-disabled="true" th:href="@{/home?page=0}"  th:name="page" >First</a>-->
+<!--                    </li>-->
+<!--                    <li class="page-item "  th:unless="${currentPage == 0}">-->
+<!--                        <a class="page-link" tabindex="-1" aria-disabled="true" th:href="@{/home?page=__${currentPage - 1}__}" th:name="page">Previous</a>-->
+<!--                    </li>-->
+<!--                <th:block th:each="pageNum : ${#numbers.sequence(1, totalPages)}" >-->
+<!--                    <li  th:classappend=" ${pageNum }==${currentPage + 1} ? 'active' : 'none' "  class="page-item"><a class="page-link" th:href="@{/home?page=__${pageNum - 1}__}" th:text="${pageNum}" ></a></li>-->
+<!--                </th:block>-->
+<!--                    <li class="page-item" th:unless="${currentPage + 1 >= totalPages}">-->
+<!--                        <a class="page-link"  th:href="@{/home?page=__${currentPage + 1}__}"  th:name="page">Next</a>-->
+<!--                    </li>-->
+<!--                    <li class="page-item" th:unless="${currentPage + 1 >= totalPages}">-->
+<!--                        <a class="page-link" th:href="@{/home?page=__${totalPages - 1}__}"  th:name="page">Last</a>-->
+<!--                    </li>-->
+<!--            </ul>-->
+<!--        </nav>-->
     </div>
 </section>
 <!-- Product Section End -->
@@ -182,12 +194,12 @@
                     <div class="section-title_me">
                         <h4>Hot Trend</h4>
                     </div>
-                    <div class="trend__item_me" th:each="products : ${productList}">
+                    <div class="trend__item_me" th:each="discount : ${discountProduct}">
                         <div class="trend__item__pic_me" >
-                            <img th:src="@{/uploads/ProductImage/__${products.image}__}" alt="">
+                            <img th:src="@{/uploads/ProductImage/__${discount.product.image}__}" style="width: 90px; height: 90px" alt="">
                         </div>
                         <div class="trend__item__text_me">
-                            <a th:href="@{/home/product/id={id}(id=${products.id})}"><h6 th:text="${products.name}"></h6></a>
+                            <a th:href="@{/home/product/id={id}(id=${discount.product.id})}"><h6 th:text="${discount.product.name}"></h6></a>
                             <div class="rating_me">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -394,7 +406,11 @@
     </div>
 </section>
 <!-- Services Section End -->
-
+<script th:inline="javascript">
+    var success = [[${success}]]
+    var error = [[${error}]]
+    sweet_Alert(success,error,null)
+</script>
 <!-- Search End -->
     <th:block th:include="~{views/Component/Footer/Footer.html :: Footer}"></th:block>
     <th:block th:include="~{views/Component/Footer/Link_JS.html :: Link_JS}"></th:block>

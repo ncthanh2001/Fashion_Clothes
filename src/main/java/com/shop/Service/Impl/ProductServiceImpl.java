@@ -25,6 +25,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Page<Product> findByIsDelete(Boolean delete , Pageable pageable) {
+        return productsRepository.findByIsDelete(delete,pageable);
+    }
+
+    @Override
     public Product save(Product product) {
 
         return productsRepository.save(product);
@@ -34,6 +39,17 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findByCategory(int cateId,Pageable pageable) {
       Category category=  categorieService.findById(cateId);
         return productsRepository.findByCategory(category,pageable);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return productsRepository.findAll();
+    }
+
+    @Override
+    public Product delete(Product product) {
+        product.setIsDelete(true);
+        return productsRepository.save(product);
     }
 
 

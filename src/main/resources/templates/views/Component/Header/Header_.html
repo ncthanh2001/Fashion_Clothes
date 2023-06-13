@@ -48,7 +48,7 @@
                         <ul>
                             <li class="" th:classappend="${flag_home == true ? 'active' : ''}"><a th:href="@{/home}">Home</a></li>
                             <li th:classappend="${ flag_shop == true ? 'active' : ''}"><a th:href="@{/home/shop}">Product</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a th:href="@{/home/blog}">Blog</a></li>
 <!--                            <li><a href="#">Pages</a>-->
 <!--                                <ul class="dropdown">-->
 <!--                                    <li><a href="../../../../../ashion-master_template/ashion-master/product-details.html">Product Details</a></li>-->
@@ -57,7 +57,7 @@
 <!--                                    <li><a href="../../../../../ashion-master_template/ashion-master/blog-details.html">Blog Details</a></li>-->
 <!--                                </ul>-->
 <!--                            </li>-->
-                            <li><a href="#">Contact</a></li>
+                            <li><a th:href="@{/home/contact}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -143,7 +143,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-primary">Save changes</input>
+                                <input type="submit" class="btn btn-primary" value="Save changes">
                             </div>
                         </form>
                     </th:block>

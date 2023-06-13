@@ -50,13 +50,15 @@ public class HomeController {
 
     @GetMapping({""})
     public String home(Model model, @RequestParam(defaultValue = "0", value = "page",required = false) int page) {
-        int pageSize = 8;
+       String success = (String) model.asMap().get("success");
+       model.addAttribute("success",success);
+        int pageSize = 3;
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<DiscountedProduct> discountedProductsPage = discountedProductService.findAll(pageable);
         List<DiscountedProduct> discountedProductsList = discountedProductsPage.getContent();
         int totalPage = discountedProductsPage.getTotalPages();
 
-        int pageSize_product = 3;
+        int pageSize_product = 8;
         Pageable pageable_product = PageRequest.of(page, pageSize_product);
         Page<Product> ProductPage = productService.findAll(pageable_product);
         List<Product> Products_List = ProductPage.getContent();
@@ -125,5 +127,14 @@ public class HomeController {
         model.addAttribute("category",categoryMap);
         model.addAttribute("flag_shop",true);
         return "views/User/shop";
+    }
+
+    @GetMapping("/blog")
+    public String getBlog(){
+        return "/views/User/blog";
+    }
+    @GetMapping("/contact")
+    public String getcontact(){
+        return "/views/User/contact";
     }
 }

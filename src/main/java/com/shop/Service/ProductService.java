@@ -14,7 +14,10 @@ public interface ProductService {
     List<Product>findByPriceBetween(BigDecimal a , BigDecimal b );
     List<Product>findTopByPrice(BigDecimal price);
     Page<Product>findAll(Pageable page);
-
+    Page<Product> findByIsDelete(Boolean delete ,Pageable pageable);
     Product save(Product product);
     Page<Product>findByCategory(int cateId,Pageable pageable);
+    List<Product> findAll();
+
+    Product delete(Product product);
 }

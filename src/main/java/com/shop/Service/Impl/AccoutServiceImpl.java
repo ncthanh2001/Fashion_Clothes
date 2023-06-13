@@ -13,6 +13,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Primary
@@ -54,6 +55,11 @@ public class AccoutServiceImpl implements AccountService  {
     public Account delete(Account account,boolean active) {
             account.setActivated( active);
         return accountsRepository.save(account);
+    }
+
+    @Override
+    public Optional<Account> findByUsernameAndEmail(String username, String email) {
+        return accountsRepository.findByUsernameAndEmail(username,email);
     }
 
 
