@@ -89,28 +89,29 @@ public class ShopCartController {
         orderCreate.setAddress(address);
         orderService.save(orderCreate);
 
-        OrderDetail orderDetail = new OrderDetail();
-        orderDetail.setOrder(orderCreate);
-        for (CartItem cart: cartItem.getItems()
-             ) {
+
+        for (CartItem cart: cartItem.getItems()) {
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrder(orderCreate);
             Product productTemp = productService.findById(cart.getId());
             orderDetail.setProduct(productTemp);
             orderDetail.setPrice(cart.getPrice());
             orderDetail.setQuantity(cart.getQty());
+            orderDetailService.save(orderDetail);
         }
-        orderDetailService.save(orderDetail);
+
         List<OrderDetail> orderDetailList = orderDetailService.findAllByOrderId(orderCreate.getId());
         BigDecimal totalPriceDetail = new BigDecimal(0);
         for (OrderDetail orderDetail1: orderDetailList
         ) {
-            totalPriceDetail=totalPriceDetail.add(orderDetail1.getPrice());
+            totalPriceDetail=totalPriceDetail.add(orderDetail1.getPrice().multiply(BigDecimal.valueOf(orderDetail1.getQuantity())) );
         }
         model.addAttribute("total" , totalPriceDetail);
         model.addAttribute("orderdetailList",orderDetailList);
         model.addAttribute("phone",phone);
         model.addAttribute("success","thành công");
         model.addAttribute("order",orderCreate);
-        model.addAttribute("order_detail",orderDetail);
+//        model.addAttribute("order_detail",orderDetailService.findAllByOrderId(orderCreate.getId()));
         return "/views/User/checkout_success";
     }
 

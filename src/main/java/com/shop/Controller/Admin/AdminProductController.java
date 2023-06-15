@@ -41,7 +41,7 @@ public class AdminProductController {
 
         Pageable pageable = PageRequest.of(0, PageSize.PAGE_SIZE);
         Page<Product> productPage = productService.findByIsDelete(false,pageable);
-        List<Product> productList = productPage.getContent();
+        List<Product> productList = productService.findAll();
         int totalPage = productPage.getTotalPages();
 
         model.addAttribute("product_edit",product_edit);

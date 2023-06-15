@@ -67,7 +67,7 @@ public class AdminHomeController {
         model.addAttribute("flag_account",true);
         Pageable pageable = PageRequest.of(page, PageSize.PAGE_SIZE);
         Page<Account> accountPage = accountService.findByActivated(true,pageable);
-        List<Account> accountList = accountPage.getContent();
+        List<Account> accountList = accountService.findAll();
         int totalPage = accountPage.getSize();
 
         model.addAttribute("accountList",accountList);
@@ -89,7 +89,7 @@ public class AdminHomeController {
 
         Pageable pageable = PageRequest.of(page, PageSize.PAGE_SIZE);
         Page<Account> accountPage = accountService.findAll(pageable);
-        List<Account> accountList = accountPage.getContent();
+        List<Account> accountList = accountService.findAll();
         int totalPage = accountPage.getSize();
 
         model.addAttribute("accountList",accountList);

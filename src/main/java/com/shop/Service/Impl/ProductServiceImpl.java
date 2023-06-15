@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> findByCategory(int cateId,Pageable pageable) {
-      Category category=  categorieService.findById(cateId);
+        Category category=  categorieService.findById(cateId);
         return productsRepository.findByCategory(category,pageable);
     }
 

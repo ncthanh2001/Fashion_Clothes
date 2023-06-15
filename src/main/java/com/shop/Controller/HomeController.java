@@ -3,7 +3,6 @@ package com.shop.Controller;
 import com.shop.Constant.PageSize;
 import com.shop.Entity.Account;
 import com.shop.Entity.Category;
-import com.shop.Entity.DiscountedProduct;
 import com.shop.Entity.Product;
 import com.shop.Service.*;
 import com.shop.Until.SessionService;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +28,6 @@ public class HomeController {
     AccountService accountService;
 
     @Autowired
-    DiscountedProductService discountedProductService;
-
-    @Autowired
     ProductService productService;
 
     @Autowired
@@ -47,16 +41,17 @@ public class HomeController {
 
     @Autowired
     SessionService sessionService;
+@GetMapping("/test")
+public String test(Model model){
 
+    return "test";
+}
     @GetMapping({""})
     public String home(Model model, @RequestParam(defaultValue = "0", value = "page",required = false) int page) {
        String success = (String) model.asMap().get("success");
        model.addAttribute("success",success);
         int pageSize = 3;
         Pageable pageable = PageRequest.of(page, pageSize);
-        Page<DiscountedProduct> discountedProductsPage = discountedProductService.findAll(pageable);
-        List<DiscountedProduct> discountedProductsList = discountedProductsPage.getContent();
-        int totalPage = discountedProductsPage.getTotalPages();
 
         int pageSize_product = 8;
         Pageable pageable_product = PageRequest.of(page, pageSize_product);
@@ -68,12 +63,6 @@ public class HomeController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPage_Product);
         model.addAttribute("flag_home",true);
-
-   if(discountedProductsList !=null){
-       model.addAttribute("discountProduct", discountedProductsList);
-       model.addAttribute("currentPage", page);
-       model.addAttribute("totalPages", totalPage);
-   }
        Account accounts = accountService.findByUsername(sessionService.get("username"));
        if(accounts !=null){
            model.addAttribute("account",accounts);

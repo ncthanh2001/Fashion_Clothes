@@ -22,7 +22,7 @@ public interface ProductsRepository extends JpaRepository<Product, Integer>, Jpa
     List<Product>findByPriceBetween(BigDecimal a , BigDecimal b );
     List<Product>findTopByPrice(BigDecimal price);
     Page<Product>findAll(Pageable page);
-Page<Product> findByIsDelete(Boolean delete,Pageable pageable);
+    Page<Product> findByIsDelete(Boolean delete,Pageable pageable);
     Page<Product>findByCategory(Category category, Pageable pageable);
 
 

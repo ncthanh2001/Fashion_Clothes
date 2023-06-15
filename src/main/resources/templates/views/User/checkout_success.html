@@ -79,17 +79,16 @@
                                   <tr th:each="ordertail , itemStat : ${orderdetailList}">
                                     <th scope="row" th:text="${itemStat.index +1}">1</th>
                                     <td th:text="${ordertail.product.name}">Mark</td>
-                                    <td th:text="${ordertail.price}">Otto</td>
+                                    <td th:text="${#numbers.formatCurrency(ordertail.price)}">Otto</td>
                                     <td th:text="${ordertail.quantity}">@mdo</td>
-                                      <td th:text="${ordertail.quantity * order_detail.price}">@mdo</td>
+                                    <td th:text="${#numbers.formatCurrency(ordertail.quantity * ordertail.price)}">@mdo</td>
                                   </tr>
                                 </tbody>
                               </table>
                         </div>
                         <div class="checkout__order__total">
                             <ul>
-                                <li>Subtotal <span>$ 750.0</span></li>
-                                <li>Total <span th:text="${total}">$ 750.0</span></li>
+                                <li>Total <span th:text="${#numbers.formatCurrency(total)}">$ 750.0</span></li>
                             </ul>
                         </div>
                         <div class="checkout__order__widget">

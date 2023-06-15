@@ -1,9 +1,7 @@
 package com.shop.Controller;
 
 import com.shop.Entity.Account;
-import com.shop.Entity.DiscountedProduct;
 import com.shop.Entity.Product;
-import com.shop.Service.DiscountedProductService;
 import com.shop.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,22 +21,13 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
-    @Autowired
-    DiscountedProductService discountedProductService;
-
     @GetMapping("/product/id={id}")
     public String getProduct(Model model , @PathVariable("id")int id) {
         model.addAttribute("account", new Account());
-        DiscountedProduct discounted_Product = discountedProductService.findById(id);
         Pageable pageable = PageRequest.of(1,4);
         Page<Product> productList = productService.findAll(pageable);
         model.addAttribute("list_footer",productList.getContent());
-        if(discounted_Product!=null){
-            model.addAttribute("discount_product",discounted_Product);
-        }else{
             model.addAttribute("product",productService.findById(id));
-        }
-
         return  "views/User/product-details";
     }
 //@GetMapping("/product") suw dung url   th:href="@{/home/product(id=${discount.getProduct().getId()})}"

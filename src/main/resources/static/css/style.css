@@ -1423,7 +1423,7 @@ ol, ul{
 	font-size: 18px;
 }
 
-.sidebar__filter a {
+.sidebar__filter .input-sub {
 	font-size: 14px;
 	color: #0d0d0d;
 	text-transform: uppercase;
@@ -1433,8 +1433,9 @@ ol, ul{
 	padding: 5px 16px 5px 24px;
 	border: 2px solid #ff0000;
 	position: absolute;
-	right: 0;
-	bottom: -5px;
+	/* right: 0; */
+	left: 0;
+	/* bottom: -5px; */
 	border-radius: 2px;
 }
 
@@ -1463,7 +1464,7 @@ ol, ul{
 .filter-range-wrap .range-slider .price-input input {
 	font-size: 16px;
 	color: #0d0d0d;
-	max-width: 16%;
+	max-width: 32%;
 	border: none;
 }
 
@@ -3181,7 +3182,7 @@ ol, ul{
 	.header__right__auth_me {
 		margin-right: 5px;
 	}
-	.sidebar__filter a {
+	.sidebar__filter .input-sub {
 		padding: 5px 15px 5px 15px;
 	}
 	.nav::before {
@@ -3204,7 +3205,7 @@ ol, ul{
 	.discount__text_me {
 		height: auto;
 	}
-	.sidebar__filter a {
+	.sidebar__filter .input-sub {
 		position: relative;
 		bottom: 0;
 	}

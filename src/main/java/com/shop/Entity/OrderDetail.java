@@ -1,5 +1,6 @@
 package com.shop.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,12 +17,14 @@ public class OrderDetail {
     @Column(name = "Id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
+    @ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.MERGE )
+    @JoinColumn(name = "order_id" , referencedColumnName = "Id")
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private Order order;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.MERGE )
+    @JoinColumn(name = "product_id" , referencedColumnName = "Id")
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private Product product;
 
     @Column(name = "Price", precision = 18, scale = 2)

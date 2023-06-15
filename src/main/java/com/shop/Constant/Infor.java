@@ -5,7 +5,7 @@ import lombok.Data;
 
 
 public enum Infor {
-    REGISTER("Xin chào ","Cảm Ơn Bạn đã Đăng Ký thành viên của Shop"),
+    REGISTER("Xin chào","Cảm Ơn Bạn đã Đăng Ký thành viên của Shop"),
     FORGOTPASS("RESETPASS","Mật khẩu mới của bạn là ");
     private String tittle;
     private String content;

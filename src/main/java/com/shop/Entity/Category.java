@@ -1,12 +1,13 @@
 package com.shop.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Nationalized;
+import org.springframework.context.annotation.Bean;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -25,7 +26,10 @@ public class Category {
     @Column(name = "is_delete", nullable = false)
     private Boolean isDelete = false;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Product> products = new LinkedHashSet<>();
+//    @OneToMany(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id", referencedColumnName = "id")
+//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+//    private List<Product> listProduct;
+//    private Set<Product> products = new LinkedHashSet<>();
 
 }

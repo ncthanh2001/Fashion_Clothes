@@ -1,5 +1,6 @@
 package com.shop.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "Products")
-public class Product {
+public class Product  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
@@ -38,19 +39,20 @@ public class Product {
     @Column(name = "Quantity", nullable = false)
     private Integer quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.MERGE )
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private Category category;
 
     @Column(name = "is_delete", nullable = false)
     private Boolean isDelete = false;
 
 
-    @OneToMany(mappedBy = "product")
-    private Set<DiscountedProduct> discountedProducts = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "product")
+//    private Set<DiscountedProduct> discountedProducts = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "product")
-    private Set<OrderDetail> orderDetails = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "product")
+//    private Set<OrderDetail> orderDetails = new LinkedHashSet<>();
 
     @Override
     public String toString() {
